@@ -32,7 +32,7 @@ typedef enum{  //矿物大小
 } rockSize;
 
 typedef struct{
-	int x, y;  //用于表示矿物位置
+    int x, y;  //用于表示矿物位置
     rockSize size;  //用于表示矿物大小
     rockType type;  //用于表示矿物类型
 } block;
