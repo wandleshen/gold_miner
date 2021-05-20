@@ -38,7 +38,7 @@ typedef struct{
 } block;
 
 typedef struct linkBlock{
-    block block;
+    block element;
     struct linkBlock* next, *prev;
 } linkBlock;
 ```
