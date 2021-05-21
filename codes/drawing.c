@@ -1,4 +1,5 @@
 #include "drawing.h"
+#define PIXELSIZE 0.03
 
 void drawRec(double dx, double dy){  //画矩形 
 	StartFilledRegion(1);
@@ -30,7 +31,7 @@ void defineColor(){
 
 void drawBlock(block tar){
 	string color[5];
-	double length = (tar.size + 1) * 0.03;
+	double length = (tar.size + 1) * PIXELSIZE;
 	
 	if (tar.type == STONE){
 		color[0] = "edgeStone";
@@ -101,28 +102,11 @@ void drawBlock(block tar){
 }
 
 void eraseBlock(block tar){
-	string color[5];
-	double length = (tar.size + 1) * 0.03;
-	
+	double length = (tar.size + 1) * PIXELSIZE;
 	MovePen(tar.x, tar.y);
-	
-	//大致思路就是逐行绘制矩形
 	SetEraseMode(1);
-	
-	movePenRelative(-2 * length, 3 * length);
-	for (int i = 4; i <= 8; i += 2){
-		drawRec(i * length, length);
-		movePenRelative(-1 * length, -1 * length);
-	}
-	movePenRelative(length, -1 * length);
-	drawRec(9 * length, 2 * length);
-	movePenRelative(length, -1 * length);
-	drawRec(8 * length, length);
-	movePenRelative(length, -1 * length);
-	drawRec(6 * length, length);
-	movePenRelative(length, -1 * length);
-	drawRec(4 * length, length);
-	
+	movePenRelative(-4 * length, 4 * length);
+	drawRec(10 * length, -9 * length);
 	SetEraseMode(0);
 }
 
