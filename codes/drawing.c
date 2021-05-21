@@ -1,5 +1,5 @@
 #include "drawing.h"
-#define PIXELSIZE 0.03
+#define PIXELSIZE 0.05
 
 void drawRec(double dx, double dy){  //»­¾ØÐÎ 
 	StartFilledRegion(1);
@@ -27,11 +27,25 @@ void defineColor(){
 	DefineColor("middleGold", 253 / 256.0, 241 / 256.0, 92 / 256.0);
 	DefineColor("lightGold", 253 / 256.0, 244 / 256.0, 121 / 256.0);
 	DefineColor("dimGold", 254 / 256.0, 250 / 256.0, 180 / 256.0);
+	DefineColor("Diamond", 61 / 256.0, 89 / 256.0, 171 / 256.0);
 }
 
 void drawBlock(block tar){
 	string color[5];
 	double length = (tar.size + 1) * PIXELSIZE;
+	
+	if (tar.type == DIAMOND){
+		SetPenColor("Diamond");
+		MovePen(tar.x, tar.y);
+		StartFilledRegion(1);
+		DrawLine(PIXELSIZE, PIXELSIZE);
+    	DrawLine(PIXELSIZE * 2, 0);
+    	DrawLine(PIXELSIZE, -PIXELSIZE);
+    	DrawLine(-PIXELSIZE * 2, -PIXELSIZE * 2);
+    	DrawLine(-PIXELSIZE * 2, PIXELSIZE * 2);
+    	EndFilledRegion();
+    	return;
+	}
 	
 	if (tar.type == STONE){
 		color[0] = "edgeStone";
@@ -57,15 +71,15 @@ void drawBlock(block tar){
 	movePenRelative(-2 * length, 3 * length);
 	for (int i = 4; i <= 8; i += 2){
 		drawRec(i * length, length);
-		movePenRelative(-1 * length, -1 * length);
+		movePenRelative(-length, -length);
 	}
-	movePenRelative(length, -1 * length);
+	movePenRelative(length, -length);
 	drawRec(9 * length, 2 * length);
-	movePenRelative(length, -1 * length);
+	movePenRelative(length, -length);
 	drawRec(8 * length, length);
-	movePenRelative(length, -1 * length);
+	movePenRelative(length, -length);
 	drawRec(6 * length, length);
-	movePenRelative(length, -1 * length);
+	movePenRelative(length, -length);
 	drawRec(4 * length, length);
 	
 	SetPenColor(color[1]);
@@ -77,7 +91,7 @@ void drawBlock(block tar){
 	drawRec(length, length);
 	
 	SetPenColor(color[2]);
-	movePenRelative(-5 * length, -1 * length);
+	movePenRelative(-5 * length, -length);
 	drawRec(4 * length, length);
 	movePenRelative(3 * length, length);
 	drawRec(2 * length, length);
@@ -85,7 +99,7 @@ void drawBlock(block tar){
 	drawRec(3 * length, length);
 	
 	SetPenColor(color[3]);
-	movePenRelative(-4 * length, -1 * length);
+	movePenRelative(-4 * length, -length);
 	drawRec(4 * length, length);
 	movePenRelative(length, length);
 	drawRec(3 * length, length);
@@ -93,7 +107,7 @@ void drawBlock(block tar){
 	drawRec(4 * length, length);
 	
 	SetPenColor(color[4]);
-	movePenRelative(-2 * length, -1 * length);
+	movePenRelative(-2 * length, -length);
 	drawRec(length, length);
 	movePenRelative(0, length);
 	drawRec(2 * length, length);
