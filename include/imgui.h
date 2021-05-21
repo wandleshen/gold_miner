@@ -1,21 +1,3 @@
-//===========================================================================
-//
-//  版权所有者： 刘新国，浙江大学计算机科学与技术学院
-//                       CAD&CG国家重点实验室
-//               xgliu@cad.zju.edu.cn
-//  最近修改：2019年2月28日 
-//            添加了控件的颜色和填充的设置，
-//            以及设置颜色的例子（在函数demoGuiALL.c的drawButtons函数里）
-//  最近修改：2019年2月26日 
-//            添加了演示文本编辑演示
-//            添加了动画演示
-//            添加了textbox 文本输入控件
-//            简化了菜单处理
-//            改 uiGetInput 为 uiGetMouse,uiGetKey,uiGetKeyboard
-//  最近修改：2019年2月18日
-//  初次创建：2018年4月，用于<<程序设计专题>>课程教学
-//
-//===========================================================================
 
 #ifndef ____ui_button_h______
 #define ____ui_button_h______
@@ -29,7 +11,7 @@
 // 
 // Generate a *fake* unique ID for gui controls at compiling/run time
 //
-#define GenUIID(N) ( ((__LINE__<<16) | ( N & 0xFFFF))^((long)&__FILE__) )
+int GenUIID(int N);
 //
 // GenUIID(0) will give a unique ID at each source code line. 
 // If you need one UI ID per line, just call GenUIID with 0

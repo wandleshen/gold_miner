@@ -1,29 +1,14 @@
-//===========================================================================
-//
-//  版权所有者：####
-//              
-//  最近修改：2019年4月15日 
-//            添加了控件的颜色和填充的设置，
-//            以及设置颜色的例子（在函数demoGuiALL.c的drawButtons函数里）
-//  最近修改：2019年2月26日 
-//            添加了演示文本编辑演示
-//            添加了动画演示
-//            添加了textbox 文本输入控件
-//            简化了菜单处理
-//            改 uiGetInput 为 uiGetMouse,uiGetKey,uiGetKeyboard
-//  最近修改：2019年2月18日
-//  初次创建：2018年4月，用于<<程序设计专题>>课程教学
-//
-//===========================================================================
 
-#include "../include/graphics.h"
-#include "../include/extgraph.h"
-#include "../include/genlib.h"
-#include "../include/simpio.h"
+#include "graphics.h"
+#include "extgraph.h"
+#include "genlib.h"
+#include "simpio.h"
 #include "conio.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+
+ 
 
 #include <windows.h>
 #include <olectl.h>
@@ -57,6 +42,10 @@ typedef struct {
 } UIState;
 
 static UIState gs_UIState;
+
+int GenUIID(int N){
+	return ( ((__LINE__<<16) | ( N & 0xFFFF))^((long)&__FILE__) );
+}
 
 /* 函数名：	InitGUI
  *
@@ -296,17 +285,17 @@ int button(int id, double x, double y, double w, double h, char *label)
 	gs_UIState.lastItem = id;
 
 	// draw the button
-	mySetPenColor(frameColor);
+	mySetPenColor("color6");
 	drawBox(x+sinkx, y+sinky, w, h, gs_button_color.fillflag,
-		label, 'C', labelColor);
+		label, 'C', "color6");
 	if( gs_button_color.fillflag ) {
-		mySetPenColor( labelColor );
+		mySetPenColor( "color6" );
 		drawRectangle(x+sinkx, y+sinky, w, h, 0);
 	}
 
 	// 画键盘提示, show a small ractangle frane
 	if( gs_UIState.kbdItem == id ) {
-		mySetPenColor( labelColor );
+		mySetPenColor( "color6" );
 		drawRectangle(x+sinkx+shrink, y+sinky+shrink, w-2*shrink, h-2*shrink, 0);
 	}
 
