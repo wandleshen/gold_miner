@@ -1,5 +1,8 @@
 #include "drawing.h"
 #define PIXELSIZE 0.05
+#define heightRatio 0.14
+#define widthRatio 0.1
+#define indent 0.15
 
 void drawRec(double dx, double dy){  //画矩形 
 	StartFilledRegion(1);
@@ -10,7 +13,7 @@ void drawRec(double dx, double dy){  //画矩形
 	EndFilledRegion();
 }
 
-void movePenRelative(double dx, double dy){  //移动相对距离 
+void movePenRelative(double dx, double dy){  //移动相对距离
 	double x = GetCurrentX();
 	double y = GetCurrentY();
 	MovePen(x + dx, y + dy);
@@ -28,6 +31,15 @@ void defineColor(){
 	DefineColor("lightGold", 253 / 256.0, 244 / 256.0, 121 / 256.0);
 	DefineColor("dimGold", 254 / 256.0, 250 / 256.0, 180 / 256.0);
 	DefineColor("Diamond", 61 / 256.0, 89 / 256.0, 171 / 256.0);
+	DefineColor("shadow",108 / 256.0, 97 / 256.0, 97 / 256.0);
+	DefineColor("shadowBrown", 102 / 256.0, 51 / 256.0, 0 / 256.0);
+	DefineColor("background", 204 / 256.0, 255 / 256.0, 255 / 256.0);
+	DefineColor("eye", 0 / 256.0, 51 / 256.0, 51 / 256.0);
+	DefineColor("shadowRed", 153 / 256.0, 0, 0);
+	DefineColor("tongue", 255 / 256.0, 102 / 256.0, 102 / 256.0);
+	DefineColor("tie", 255 / 256.0, 51 / 256.0, 51 / 256.0);
+	DefineColor("pants", 204 / 256.0, 102 / 256.0, 0 / 256.0);
+	DefineColor("shadowYellow", 204 / 256.0, 204 / 256.0, 0 / 256.0);
 }
 
 void drawBlock(block tar){
@@ -114,7 +126,171 @@ void drawBlock(block tar){
 	movePenRelative(length, length);
 	drawRec(4 * length, length);
 }
+//绘制开始界面
+void drawIniPage(){
+    string text[5] = {"退出游戏","帮助","排行榜","继续游戏","开始游戏"};
+    double wWidth = GetWindowWidth();
+    double wHeight = GetWindowHeight();
+    block *tempBlock = (block*)malloc(sizeof(block));
+    tempBlock->size = (0.1+heightRatio)*wHeight;
+    tempBlock->type = GOLD;
+    tempBlock->x = (widthRatio+0.7)*wWidth;
+    tempBlock->y = (0.1+heightRatio)*wHeight;
+    SetPenColor("background");
+    drawRec(wWidth,wHeight);
+    for(int i = 0;i<5;i++){
+        drawBlock(*tempBlock);
+        SetPenColor("black");
+        MovePen((widthRatio+0.5+indent)*wWidth,((1.7+i)*heightRatio)*wHeight);
+        DrawTextString(text[i]);
+        tempBlock->y += heightRatio*wHeight;
+    }
+	feee(tempBlock);
+	drawHaiMian();
+}
 
+/*绘制一个海绵宝宝*/
+void drawHaiMian(){
+    double width = GetWindowWidth();
+    double height = GetWindowHeight();
+    double mostLeft = 0.15*width;
+    double mostLow = 0.1*height;
+    double myPixel = width*0.02;
+    SetPenColor("black");
+    MovePen(mostLeft,mostLow+myPixel*6);
+    drawRec(myPixel,20*myPixel);
+    MovePen(mostLeft+myPixel,mostLow+26*myPixel);
+    drawRec(17*myPixel,myPixel);
+    MovePen(mostLeft+18*myPixel,mostLow+26*myPixel);
+    drawRec(myPixel,-20*myPixel);
+    MovePen(mostLeft+myPixel,mostLow+5*myPixel);
+    drawRec(myPixel*17,myPixel);
+    drawHalfDimmRec(mostLeft+myPixel, mostLow+6*myPixel, "pants", "brown", 3,myPixel);
+    drawHalfDimmRec(mostLeft+myPixel, mostLow+9*myPixel, "white", "dimStone", 1, myPixel);
+    drawHalfDimmRec(mostLeft+myPixel, mostLow+10*myPixel, "middleGold", "shadowYellow",16,  myPixel);
+	//眼睛
+    drawEye(mostLeft+2*myPixel,mostLow+18*myPixel,myPixel);
+	drawEye(mostLeft+8*myPixel,mostLow+18*myPixel,myPixel);
+    //嘴
+    SetPenColor("shadowRed");
+    MovePen(mostLeft+myPixel*5,mostLow+13*myPixel);
+    drawRec(5*myPixel,2*myPixel);
+    MovePen(mostLeft+myPixel*6,mostLow+12*myPixel);
+    drawRec(myPixel,myPixel);
+    MovePen(mostLeft+myPixel*10,mostLow+14*myPixel);
+    drawRec(myPixel,myPixel);
+    MovePen(mostLeft+myPixel*11,mostLow+15*myPixel);
+    drawRec(myPixel,myPixel); 
+    SetPenColor("tongue");
+    MovePen(mostLeft+myPixel*7,mostLow+12*myPixel);
+    drawRec(2*myPixel,myPixel);
+    SetPenColor("white");
+	MovePen(mostLeft+myPixel*6,mostLow+14*myPixel);
+    drawRec(myPixel,myPixel);
+    MovePen(mostLeft+myPixel*8,mostLow+14*myPixel);
+    drawRec(myPixel,myPixel);
+    //领带
+	SetPenColor("tie");
+	MovePen(mostLeft+myPixel*7,mostLow+9*myPixel);
+	drawRec(myPixel,myPixel);
+	SetPenColor("tongue");
+	MovePen(mostLeft+myPixel*7,mostLow+7*myPixel);
+	drawRec(myPixel,2*myPixel);
+	//下方物体
+	SetPenColor("black");
+	for(int i = 0; i < 4; i++){
+		MovePen(mostLeft+myPixel*(2+3*i),mostLow+8*myPixel);
+		drawRec(myPixel*2,myPixel);
+	}
+	//手
+	drawHand(mostLeft+15*myPixel,mostLow+11*myPixel,myPixel);
+	//脚
+	SetPenColor("middleGold");
+	MovePen(mostLeft+2*myPixel,mostLow+5*myPixel);
+	drawRec(myPixel,myPixel);
+	SetPenColor("black");
+	MovePen(mostLeft+2*myPixel,mostLow+4*myPixel);
+	drawRec(myPixel,myPixel);
+	drawPartLow(mostLeft+2*myPixel,mostLow+5*myPixel,myPixel);
+	drawPartLow(mostLeft+9*myPixel,mostLow+5*myPixel,myPixel);
+}
+
+
+void drawEye(double x, double y,double myPixel){
+    string saveColor = GetPenColor();
+    SetPenColor("white");
+    MovePen(x,y);
+    drawRec(5*myPixel,3*myPixel);
+    MovePen(x+myPixel,y-myPixel);
+    drawRec(2*myPixel,5*myPixel);
+    SetPenColor("black");
+    MovePen(x+2*myPixel,y);
+    drawRec(myPixel,myPixel);
+    SetPenColor("eye");
+    MovePen(x+2*myPixel,y+myPixel);
+    drawRec(myPixel,myPixel);
+    MovePen(x+3*myPixel,y);
+    drawRec(myPixel,myPixel);
+    SetPenColor(saveColor);
+}
+
+void drawHand(double x, double y, double myPixel){
+	SetPenColor("white");
+	MovePen(x,y);
+	drawRec(3*myPixel,myPixel);
+	SetPenColor("middleGold");
+	MovePen(x+3*myPixel,y);
+	drawRec(3*myPixel,myPixel);
+	MovePen(x+6*myPixel,y);
+	drawRec(myPixel,-6*myPixel);
+	MovePen(x+5*myPixel,y-2*myPixel);
+	drawRec(myPixel,-2*myPixel);
+	SetPenColor("black");
+	MovePen(x+4*myPixel,y+myPixel);
+	drawRec(2*myPixel,myPixel);
+	MovePen(x+4*myPixel,y-myPixel);
+	drawRec(2*myPixel,myPixel);
+	MovePen(x+6*myPixel,y);
+	drawRec(myPixel,myPixel);
+	MovePen(x+7*myPixel,y);
+	drawRec(myPixel,-6*myPixel);
+	MovePen(x+6*myPixel,y-7*myPixel);
+	drawRec(myPixel,myPixel);
+	MovePen(x+5*myPixel,y-6*myPixel);
+	drawRec(myPixel,2*myPixel);
+	MovePen(x+4*myPixel,y-4*myPixel);
+	drawRec(myPixel,2*myPixel);
+	MovePen(x+5*myPixel,y-2*myPixel);
+	drawRec(myPixel,myPixel);
+}
+void drawPartLow(double x, double y, double myPixel){
+	SetPenColor("middleGold");
+	MovePen(x+3*myPixel,y);
+	drawRec(myPixel,-2*myPixel);
+	SetPenColor("white");
+	MovePen(x+3*myPixel,y-3*myPixel);
+	drawRec(myPixel,myPixel);
+	SetPenColor("black");
+	MovePen(x+2*myPixel,y);
+	drawRec(myPixel,-5*myPixel);
+	MovePen(x+myPixel,y-4*myPixel);
+	drawRec(4*myPixel,myPixel);
+	MovePen(x+4*myPixel,y-4*myPixel);
+	drawRec(myPixel,4*myPixel);
+	MovePen(x+3*myPixel,y-5*myPixel);
+	drawRec(myPixel,myPixel);
+	SetPenColor("brown");
+	MovePen(x+2*myPixel,y);
+	drawRec(3*myPixel,myPixel);
+}
+void drawHalfDimmRec(double x, double y, string color1, string color2, int height, double myPixel){
+    SetPenColor(color1);
+    MovePen(x,y);
+    drawRec(14*myPixel,height*myPixel);
+    SetPenColor(color2);
+    MovePen(x+13*myPixel,y);
+    drawRec(4*myPixel,height*myPixel);
+}
 void eraseBlock(block tar){
 	double length = (tar.size + 1) * PIXELSIZE;
 	MovePen(tar.x, tar.y);
@@ -123,4 +299,3 @@ void eraseBlock(block tar){
 	drawRec(10 * length, -9 * length);
 	SetEraseMode(0);
 }
-
