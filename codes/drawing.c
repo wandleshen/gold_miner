@@ -145,7 +145,7 @@ void drawIniPage(){
         DrawTextString(text[i]);
         tempBlock->y += heightRatio*wHeight;
     }
-	feee(tempBlock);
+	free(tempBlock);
 	drawHaiMian();
 }
 
