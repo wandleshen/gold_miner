@@ -1,6 +1,37 @@
-#ifdef FILECODE
+#ifndef FILECODE
 #define FILECODE
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <windows.h>
+
+//默认最多存储五个玩家的数据
+#define MAX_USER_SAVED 5
+
+//玩家存档数据结构
 typedef struct continueUserList{
-    
-}
+    int level;
+    int score;
+    int money;
+    int grades[4];
+} User;
+
+//排行榜玩家结构
+typedef struct userRank{
+    int level;
+    int score;
+    char userName[10]; //用户名最多9位
+    struct userRank* next;
+} *List;
+//当前玩家游戏状态
+extern User currentStatus;
+//判定游戏是否结束
+extern int isGameOver;
+
+
+void saveGame();//将当前游戏状态存储到saveGame.txt中
+void loadGame();//从saveGame.txt中读取当前游戏状态
+void saveRank();//建立存档，文件默认存储5个玩家的数据
+void loadRank();//将文件中的数据保存到userRank.txt中（注意此文件初始有五个0值），请勿删除
+
 #endif
