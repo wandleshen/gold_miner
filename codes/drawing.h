@@ -27,8 +27,9 @@ typedef struct linkBlock{
     struct linkBlock* next, *prev;
 } linkBlock;
 
-void defineColor();
-void drawBlock(block);
-void eraseBlock(block);
+void defineColor();  //定义颜色 
+void drawBlock(block);  //绘出金矿石块钻石 
+void eraseBlock(block);  //擦除方块
+void drawScene();  //绘出场景 
 
 #endif

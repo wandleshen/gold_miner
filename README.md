@@ -4,9 +4,9 @@
 
 - 游戏本体
 
-  金矿、炸弹、秘密道具、背景、计分、计时
+  金矿、石头、背景、计分、计时
 
-  文件、音乐、商店（修改数值）、按钮
+  文件、音乐、商店（拉取速度增加，积分增加，石头价值增加，钩子变大）
 
 - 菜单（暂停、继续、保存游戏、读取游戏、金手指、帮助）及其配套快捷键
 
@@ -42,3 +42,15 @@ typedef struct linkBlock{
     struct linkBlock* next, *prev;
 } linkBlock;
 ```
+
+玩家存档结构
+
+```c
+typedef struct{
+    int level;
+    int score;
+    int money;
+    int grades[4];  //储存四项能力的等级（分别是拉取速度增加，积分增加，石头价值增加，钩子变大）
+} player;
+```
+
