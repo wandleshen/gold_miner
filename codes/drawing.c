@@ -3,6 +3,16 @@
 #define heightRatio 0.14
 #define widthRatio 0.1
 #define indent 0.15
+#define wWidth GetWindowWidth()
+#define wHeight GetWindowHeight()
+
+void drawHaiMian(double width, double height, double mostLeft,double mostLow, double myPixel);
+void drawEye(double x, double y,double myPixel);
+void drawHand(double x, double y, double myPixel);
+void drawPartLow(double x, double y, double myPixel);
+void drawPartLow(double x, double y, double myPixel);
+void drawHalfDimmRec(double x, double y, string color1, string color2, int height, double myPixel);
+
 
 void drawRec(double dx, double dy){  //画矩形
 	StartFilledRegion(1);
@@ -40,6 +50,7 @@ void defineColor(){
 	DefineColor("tie", 255 / 256.0, 51 / 256.0, 51 / 256.0);
 	DefineColor("pants", 204 / 256.0, 102 / 256.0, 0 / 256.0);
 	DefineColor("shadowYellow", 204 / 256.0, 204 / 256.0, 0 / 256.0);
+	DefineColor("Beige", 245 / 256.0, 245 / 256.0, 220 / 256.0);
 }
 
 void drawBlock(block tar){
@@ -129,12 +140,10 @@ void drawBlock(block tar){
 
 void drawIniPage(){
     string text[5] = {"退出游戏","游戏帮助","排行榜","继续游戏","开始游戏"};
-    double wWidth = GetWindowWidth();
-    double wHeight = GetWindowHeight();
     block *tempBlock = (block*)malloc(sizeof(block));
     tempBlock->size = (0.1+heightRatio)*wHeight;
     tempBlock->type = GOLD;
-    tempBlock->x = (widthRatio+0.7)*wWidth;
+    tempBlock->x = (widthRatio+0.68)*wWidth;
     tempBlock->y = (0.1+heightRatio)*wHeight;
     SetPenColor("background");
     drawRec(wWidth,wHeight);
@@ -146,16 +155,11 @@ void drawIniPage(){
         tempBlock->y += heightRatio*wHeight;
     }
 	free(tempBlock);
-	drawHaiMian();
+	drawHaiMian(wWidth, wHeight, 0.15 * wWidth, 0.1 * wHeight, 0.02 * wWidth);
 }
 
 /*画一个海绵宝宝（bushi）*/
-void drawHaiMian(){
-    double width = GetWindowWidth();
-    double height = GetWindowHeight();
-    double mostLeft = 0.15*width;
-    double mostLow = 0.1*height;
-    double myPixel = width*0.02;
+void drawHaiMian(double width, double height, double mostLeft,double mostLow, double myPixel){
     SetPenColor("black");
     MovePen(mostLeft,mostLow+myPixel*6);
     drawRec(myPixel,20*myPixel);
@@ -215,7 +219,6 @@ void drawHaiMian(){
 	drawPartLow(mostLeft+9*myPixel,mostLow+5*myPixel,myPixel);
 }
 
-
 void drawEye(double x, double y,double myPixel){
     string saveColor = GetPenColor();
     SetPenColor("white");
@@ -263,6 +266,7 @@ void drawHand(double x, double y, double myPixel){
 	MovePen(x+5*myPixel,y-2*myPixel);
 	drawRec(myPixel,myPixel);
 }
+
 void drawPartLow(double x, double y, double myPixel){
 	SetPenColor("middleGold");
 	MovePen(x+3*myPixel,y);
@@ -283,6 +287,7 @@ void drawPartLow(double x, double y, double myPixel){
 	MovePen(x+2*myPixel,y);
 	drawRec(3*myPixel,myPixel);
 }
+
 void drawHalfDimmRec(double x, double y, string color1, string color2, int height, double myPixel){
     SetPenColor(color1);
     MovePen(x,y);
@@ -291,6 +296,118 @@ void drawHalfDimmRec(double x, double y, string color1, string color2, int heigh
     MovePen(x+13*myPixel,y);
     drawRec(4*myPixel,height*myPixel);
 }
+
+void drawStore(){
+	char s[2];
+	string power[4] = {
+		"力量增强",
+		"得分提升",
+		"价值增加",
+		"抓钩增大" 
+	};
+	
+	string text[4] = {
+		"当你吃下大力丸，你拉钩子变得更加顺手了",
+		"技艺高超的矿工总是可以找到更加值钱的矿物",
+		"精明的老矿工可以把矿物卖出一个好价钱",
+		"工欲善其事，必先大其抓钩"
+	};
+	
+	SetFont("微软雅黑");
+	MovePen(0, 0);
+	SetPenColor("background");
+    drawRec(wWidth, wHeight - 0.31);
+    MovePen(wWidth / 2 - 0.6, wHeight - 1);
+    
+    //商店标题 
+    SetPenColor("Black");
+    SetPointSize(40);
+    DrawTextString("商店"); 
+	MovePen(wWidth / 2 - 1.17, wHeight - 1.25);
+	SetPointSize(15);
+	DrawTextString("强大的矿工需要强大的能力");
+	
+	//吉祥物 
+	drawHaiMian(wWidth, wHeight, 0.6 * wWidth, 0.15 * wHeight, 0.015 * wWidth);
+	
+	//剩余货币 
+	MovePen(0.5, wHeight - 1.25);
+	SetPointSize(20);
+	sprintf(s, "当前金钱：%d", currentStatus.money);
+	DrawTextString(s);
+	
+	//四个升级框 
+	for (int i = 0; i < 4; i++){
+		//升级能力名称 
+		MovePen(0.5, wHeight - 2.8 - i * 1.1);
+		DrawLine(5, 0);
+		DrawLine(0, 1);
+		DrawLine(-5, 0);
+		DrawLine(0, -1);
+		MovePen(0.6, wHeight - 2.4 - i * 1.1);
+		SetPointSize(20);
+		SetFont("仿宋");
+		DrawTextString(power[i]);
+		SetPointSize(20);
+		//当前等级、简介、价格 
+		MovePen(1.5, wHeight - 2.2 - i * 1.1);
+		sprintf(s, "Lv.%d", currentStatus.grades[i]);
+		DrawTextString(s);
+		MovePen(2, wHeight - 2.2 - i * 1.1);
+		SetPointSize(12);
+		DrawTextString(text[i]);
+		SetPointSize(20);
+		MovePen(4.6, wHeight - 2.2 - i * 1.1);
+		sprintf(s, "$%.0lf", pow(2, (currentStatus.grades[i] + 1)) * 1000);
+		DrawTextString(s);
+		//可视化框 
+		for (int j = 0; j < 5; j++){
+			if (j < currentStatus.grades[i])
+				StartFilledRegion(1);
+			MovePen(1.5 + j * 0.6, wHeight - 2.5 - i * 1.1);
+			DrawLine(0.5, 0);
+			DrawLine(0, 0.2);
+			DrawLine(-0.5, 0);
+			DrawLine(0, -0.2);
+			if (j < currentStatus.grades[i])
+				EndFilledRegion();
+		}
+		//升级按钮 
+		SetPointSize(20);
+		MovePen(4.6, wHeight - 2.75 - i * 1.1);
+		DrawLine(0.5, 0);
+		DrawLine(0, 0.25);
+		DrawLine(-0.5, 0);
+		DrawLine(0, -0.25);
+		MovePen(4.65, wHeight - 2.7 - i * 1.1);
+		DrawTextString("升级");
+	}
+	
+	//右上角按钮 
+	SetPenColor("Blue");
+	
+	MovePen(wWidth - 2, wHeight - 1);
+	DrawLine(1, 0);
+	DrawLine(0, 0.4);
+	DrawLine(-1, 0);
+	DrawLine(0, -0.4);
+	
+	MovePen(wWidth - 1.9, wHeight - 0.9);
+	DrawTextString("继续游戏");
+	
+	MovePen(wWidth - 2, wHeight - 1.5);
+	DrawLine(1, 0);
+	DrawLine(0, 0.4);
+	DrawLine(-1, 0);
+	DrawLine(0, -0.4);
+	MovePen(wWidth - 1.9, wHeight - 1.4);
+	DrawTextString("保存游戏");
+	SetPenColor("Black");
+	
+	SetFont("微软雅黑");
+	SetPointSize(15);
+}
+
 void eraseBlock(block tar){
 	double length = (tar.size + 1) * PIXELSIZE;
 	MovePen(tar.x, tar.y);

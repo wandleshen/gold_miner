@@ -1,7 +1,7 @@
 [Project]
 FileName=graphics.dev
 Name=graphics
-UnitCount=23
+UnitCount=25
 Type=0
 Ver=2
 ObjFiles=
@@ -272,6 +272,26 @@ BuildCmd=
 
 [Unit21]
 FileName=codes\menu.h
+CompileCpp=0
+Folder=codes
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit24]
+FileName=codes\file.c
+CompileCpp=0
+Folder=codes
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit25]
+FileName=codes\file.h
 CompileCpp=0
 Folder=codes
 Compile=1

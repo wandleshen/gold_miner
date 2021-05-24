@@ -7,7 +7,8 @@ void drawGame();  //绘出游戏菜单
 void drawTrainer();  //绘出修改器菜单 
 void drawHelp();  //绘出帮助菜单
 int isShow[3] = {0, 0, 0};  //三个二级菜单显示情况 
-extern int isMenu;  //from event.h 表示正在进行菜单相关操作 
+int flag = 0;  //表示是否呼出确认框 
+int i = -1;
 
 void drawMenu(){  //绘出顶部菜单栏 
 	SetPenColor("Blue");
@@ -25,12 +26,63 @@ void drawMenu(){  //绘出顶部菜单栏
 	DrawTextString("帮助");
 }
 
+void showBox(int i){  //展示二次确认框 
+	SetPenColor("Beige");
+	MovePen(GetWindowWidth() / 2 - 0.5, GetWindowHeight() / 2 - 0.5);
+	drawRec(4, 1);
+	SetPenColor("Black");
+	MovePen(GetWindowWidth() / 2 - 0.4, GetWindowHeight() / 2 + 0.2);
+	if (i)
+		DrawTextString("您确定要载入游戏吗？未保存的内容都将永久丢失！");
+	else
+		DrawTextString("您确定要退出游戏吗？未保存的内容都将永久丢失！");
+	MovePen(GetWindowWidth() / 2 - 0.3, GetWindowHeight() / 2 - 0.4);
+	DrawLine(1.3, 0);
+	DrawLine(0, 0.3);
+	DrawLine(-1.3 , 0);
+	DrawLine(0, -0.3);
+	MovePen(GetWindowWidth() / 2 - 0.2, GetWindowHeight() / 2 - 0.3);
+	if (i)
+		DrawTextString("赶紧给我载入(y)");
+	else
+		DrawTextString("赶紧给我退出(y)");
+	MovePen(GetWindowWidth() / 2 + 1.3, GetWindowHeight() / 2 - 0.4);
+	DrawLine(1.5, 0);
+	DrawLine(0, 0.3);
+	DrawLine(-1.5 , 0);
+	DrawLine(0, -0.3);
+	MovePen(GetWindowWidth() / 2 + 1.4, GetWindowHeight() / 2 - 0.3);
+	DrawTextString("确实是我按错了(n)");
+}
+
 void menuMouseEvent(int x, int y, int button, int event){
 	double mouseX = ScaleXInches(x);
 	double mouseY = ScaleYInches(y);
 	
 	switch(event){
 		case BUTTON_DOWN:
+			
+			if (flag){  //按下确认或者取消按键对应操作 
+				if (mouseY >= GetWindowHeight() / 2 - 0.4 && mouseY <= GetWindowHeight() / 2 - 0.1
+					&& mouseX >= GetWindowWidth() / 2 - 0.3 && mouseX <= GetWindowWidth() / 2 + 0.9){
+					if (i == 1)
+						loadGame();
+					if (i == 0){
+						MovePen(0, 0);
+						drawIniPage();
+					}
+				}
+				else{
+					if (isStore)
+						drawStore();
+					//else if (isGame)  //画出游戏界面  #TODO 
+						
+				}
+				i = -1;
+				flag = 0;
+				isMenu = 0;
+			}
+			
 			if (mouseY >= GetWindowHeight() - H){  //绘制最顶层对应菜单的二级菜单
 				if (mouseX <= W){
 					isShow[2] = 0;
@@ -38,7 +90,16 @@ void menuMouseEvent(int x, int y, int button, int event){
 					isShow[0] = 1 - isShow[0];
 					drawHelp();
 					drawTrainer();
-					drawGame();  //对应的菜单要最后画，以免被擦除 
+					//对应的菜单要最后画，以免被擦除 
+					if (isShow[0] == 0){
+						drawGame();
+						drawStore();
+					}
+					else{
+						drawStore();
+						drawGame();
+					}
+
 				}
 				else if (mouseX <= 2 * W){
 					isShow[2] = 0;
@@ -46,7 +107,14 @@ void menuMouseEvent(int x, int y, int button, int event){
 					isShow[0] = 0;
 					drawHelp();
 					drawGame();
-					drawTrainer();
+					if (isShow[1] == 0){
+						drawTrainer();
+						drawStore();
+					}
+					else{
+						drawStore();
+						drawTrainer();
+					}
 				}
 				else{
 					isShow[2] = 1 - isShow[2];
@@ -54,7 +122,14 @@ void menuMouseEvent(int x, int y, int button, int event){
 					isShow[0] = 0;
 					drawGame();
 					drawTrainer();
-					drawHelp();
+					if (isShow[2] == 0){
+						drawHelp();
+						drawStore();
+					}
+					else{
+						drawStore();
+						drawHelp();
+					}
 				}
 				isMenu = 1;
 			}
@@ -69,24 +144,44 @@ void menuMouseEvent(int x, int y, int button, int event){
 				isShow[2] = 0;
 				drawHelp();
 				isMenu = 0;
+				drawStore();
 			}
 			
 			else if (isShow[1]){  //有关修改器菜单的内容  #TODO 
 				if (mouseX >= W && mouseX <= 2 * W){
-					
 				}
 				isShow[1] = 0;
 				drawTrainer();
 				isMenu = 0;
+				drawStore();
 			}
 			
 			else if (isShow[0]){  //有关游戏菜单的内容  #TODO
 				if (mouseX <= W){
-					
+					if (mouseY >= GetWindowHeight() - 2 * H){  //载入游戏 
+						flag = 1;
+						i = 1;
+					}
+					else if (mouseY >= GetWindowHeight() - 3 * H){  //暂停 
+						
+					}
+					else if (mouseY >= GetWindowHeight() - 4 * H){  //静音 
+						
+					}
+					else if (mouseY >= GetWindowHeight() - 5 * H){  //退出 
+						flag = 1;
+						i = 0;
+					}
 				}
 				isShow[0] = 0;
 				drawGame();
 				isMenu = 0;
+				drawStore();
+				if (flag){
+					showBox(i);
+					isMenu = 1;  //继续调用menu相关操作 
+				}
+
 			}
 			break;
 	}
@@ -100,12 +195,39 @@ void menuKeyboardEvent(int key, int event){
 					system("notepad _help");
 					break;
 				case 'L': case 'l':  //Load Game
+					showBox(1);
+					flag = 1;
+					i = 1;
+					isMenu = 1;
 					break;
 				case 'P': case 'p':  //Pause
 					break;
 				case 'M': case 'm':  //Mute
 					break;
 				case 'E': case 'e':  //Exit
+					break;
+				case 'Y': case 'y':
+					if (flag){
+						if (i == 1)
+							loadGame();
+						if (i == 0){
+							MovePen(0, 0);
+							drawIniPage();
+						}
+						i = -1;
+						flag = 0;
+						isMenu = 0;
+					}
+					break;
+				case 'N': case 'n':
+					if (flag){
+						if (isStore)
+							drawStore();
+						//else if (isGame)  //画出游戏界面  #TODO 
+						i = -1;
+						flag = 0;
+						isMenu = 0;
+					}
 					break;
 			}
 		break;
@@ -128,6 +250,7 @@ void drawGame(){  //绘出游戏菜单
 		DrawLine(W, 0);
 		DrawLine(0, H);
 	}
+	
 	for (int i = 1; i < 5; i++){
 		MovePen(0.1, GetWindowHeight() - 0.2 - i * H);
 		DrawTextString(text[i - 1]);

@@ -18,11 +18,11 @@ void print(){
 //将当前游戏状态存储到saveGame.txt中
 void saveGame(){
     FILE *fp;
-    if ((fp =fopen("../saveGame.txt","wb"))==NULL){
+    if ((fp =fopen("Game.save","wb"))==NULL){
         MessageBox(NULL,"不能新建文件","错误",0);
         return;
     }
-    print();
+    //print();
     fwrite(&currentStatus.level,4,1,fp);
     fwrite(&currentStatus.score,4,1,fp);
     fwrite(&currentStatus.money,4,1,fp);
@@ -36,7 +36,7 @@ void saveGame(){
 //从saveGame.txt中读取当前游戏状态
 void loadGame(){
     FILE *fp;
-    if((fp = fopen("../saveGame.txt","rb")) == NULL){
+    if((fp = fopen("Game.save","rb")) == NULL){
         MessageBox(NULL,"游戏存档无法读取，请检查文件是否存在或者损坏","错误",0);
         return;
     }
@@ -46,7 +46,7 @@ void loadGame(){
     for(int i = 0; i< 4 ;i++){
         fread(&currentStatus.grades[i],4,1,fp);
     }
-    print();
+    //print();
     fclose(fp);
 }
 
@@ -95,7 +95,7 @@ void saveRank(){
     }
     insertUser(currentStatus);
     //需要从外部获取输入的用户名，当前指定为test
-    if((fp = fopen("../userRank.txt","wb")) == NULL){
+    if((fp = fopen("Rank.user","wb")) == NULL){
         MessageBox(NULL,"无法新建排行榜文件","错误",0);
         return;
     }
@@ -129,7 +129,7 @@ void loadRank(){
     }
     userHead = userTail = (List)malloc(sizeof(struct userRank));
     FILE* fp;
-    if((fp = fopen("../userRank.txt","rb")) == NULL){
+    if((fp = fopen("Rank.user","rb")) == NULL){
         MessageBox(NULL,"无法读取排行榜文件,请检查文件是否存在","错误",0);
         return;
     }

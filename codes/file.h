@@ -1,3 +1,4 @@
+#pragma once
 #ifndef FILECODE
 #define FILECODE
 #include <stdlib.h>
