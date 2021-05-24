@@ -4,7 +4,7 @@
 #define widthRatio 0.1
 #define indent 0.15
 
-void drawRec(double dx, double dy){  //画矩形 
+void drawRec(double dx, double dy){  //?????? 
 	StartFilledRegion(1);
 	DrawLine(dx, 0);
 	DrawLine(0, dy);
@@ -13,7 +13,7 @@ void drawRec(double dx, double dy){  //画矩形
 	EndFilledRegion();
 }
 
-void movePenRelative(double dx, double dy){  //移动相对距离
+void movePenRelative(double dx, double dy){  //?????à???à??
 	double x = GetCurrentX();
 	double y = GetCurrentY();
 	MovePen(x + dx, y + dy);
@@ -77,7 +77,7 @@ void drawBlock(block tar){
 	
 	MovePen(tar.x, tar.y);
 	
-	//大致思路就是逐行绘制矩形
+	//?ó?????·????????????????
 	SetPenColor(color[0]);
 	
 	movePenRelative(-2 * length, 3 * length);
@@ -126,9 +126,9 @@ void drawBlock(block tar){
 	movePenRelative(length, length);
 	drawRec(4 * length, length);
 }
-//绘制开始界面
+
 void drawIniPage(){
-    string text[5] = {"退出游戏","帮助","排行榜","继续游戏","开始游戏"};
+    string text[5] = {"???????·","°??ú","????°?","???????·","???????·"};
     double wWidth = GetWindowWidth();
     double wHeight = GetWindowHeight();
     block *tempBlock = (block*)malloc(sizeof(block));
@@ -149,7 +149,7 @@ void drawIniPage(){
 	drawHaiMian();
 }
 
-/*绘制一个海绵宝宝*/
+/*???????????à±?±?*/
 void drawHaiMian(){
     double width = GetWindowWidth();
     double height = GetWindowHeight();
@@ -168,10 +168,10 @@ void drawHaiMian(){
     drawHalfDimmRec(mostLeft+myPixel, mostLow+6*myPixel, "pants", "brown", 3,myPixel);
     drawHalfDimmRec(mostLeft+myPixel, mostLow+9*myPixel, "white", "dimStone", 1, myPixel);
     drawHalfDimmRec(mostLeft+myPixel, mostLow+10*myPixel, "middleGold", "shadowYellow",16,  myPixel);
-	//眼睛
+	//????
     drawEye(mostLeft+2*myPixel,mostLow+18*myPixel,myPixel);
 	drawEye(mostLeft+8*myPixel,mostLow+18*myPixel,myPixel);
-    //嘴
+    //×ì
     SetPenColor("shadowRed");
     MovePen(mostLeft+myPixel*5,mostLow+13*myPixel);
     drawRec(5*myPixel,2*myPixel);
@@ -189,22 +189,22 @@ void drawHaiMian(){
     drawRec(myPixel,myPixel);
     MovePen(mostLeft+myPixel*8,mostLow+14*myPixel);
     drawRec(myPixel,myPixel);
-    //领带
+    //?ì??
 	SetPenColor("tie");
 	MovePen(mostLeft+myPixel*7,mostLow+9*myPixel);
 	drawRec(myPixel,myPixel);
 	SetPenColor("tongue");
 	MovePen(mostLeft+myPixel*7,mostLow+7*myPixel);
 	drawRec(myPixel,2*myPixel);
-	//下方物体
+	//??·?????
 	SetPenColor("black");
 	for(int i = 0; i < 4; i++){
 		MovePen(mostLeft+myPixel*(2+3*i),mostLow+8*myPixel);
 		drawRec(myPixel*2,myPixel);
 	}
-	//手
+	//??
 	drawHand(mostLeft+15*myPixel,mostLow+11*myPixel,myPixel);
-	//脚
+	//??
 	SetPenColor("middleGold");
 	MovePen(mostLeft+2*myPixel,mostLow+5*myPixel);
 	drawRec(myPixel,myPixel);
