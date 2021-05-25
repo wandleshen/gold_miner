@@ -65,8 +65,10 @@ void menuMouseEvent(int x, int y, int button, int event){
 			if (flag){  //按下确认或者取消按键对应操作 
 				if (mouseY >= GetWindowHeight() / 2 - 0.4 && mouseY <= GetWindowHeight() / 2 - 0.1
 					&& mouseX >= GetWindowWidth() / 2 - 0.3 && mouseX <= GetWindowWidth() / 2 + 0.9){
-					if (i == 1)
+					if (i == 1){
 						loadGame();
+						drawStore();
+					}
 					if (i == 0){
 						MovePen(0, 0);
 						drawIniPage();

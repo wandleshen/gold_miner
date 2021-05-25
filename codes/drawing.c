@@ -359,6 +359,8 @@ void drawStore(){
 		SetPointSize(20);
 		MovePen(4.6, wHeight - 2.2 - i * 1.1);
 		sprintf(s, "$%.0lf", pow(2, (currentStatus.grades[i] + 1)) * 1000);
+		if (currentStatus.grades[i] == 5)
+			sprintf(s, "N/A");
 		DrawTextString(s);
 		//©ийс╩╞©Р 
 		for (int j = 0; j < 5; j++){
