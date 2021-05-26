@@ -8,8 +8,8 @@ void gameHelp(){
 	system("notepad _help");
 }
 int isInBox(Button a, double mouseX, double mouseY){
-	//条件是鼠标恰好点击字符串 ,最长的选项长度是4，故乘5 
-	return mouseX >= a.x && mouseY <= a.y +0.4 && mouseY >= a.y-0.4;
+
+	return mouseX >= a.x &&mouseX <= a.x+1 && mouseY <= a.y +0.4 && mouseY >= a.y-0.4;
 }
 
 void initPageEvent(int x, int y, int button, int event){
@@ -19,6 +19,12 @@ void initPageEvent(int x, int y, int button, int event){
 		switch(event){
 			case BUTTON_DOWN:{
 				if(button == LEFT_BUTTON){
+					if(isRanking){
+						if(mouseX >= GetWindowWidth()/2-0.5&& mouseX <= GetWindowWidth()/2+0.5 && mouseY >= GetWindowHeight()/2+1.5 && mouseY <= GetWindowHeight()/2+2.5){
+							reDrawIniPage();
+						}
+						return;
+					}
 					int i;
 					for(i = 0;i < 5; i++){
 						if(isInBox(buttonArray[i],mouseX,mouseY) && buttonArray[i].isDisabled == FALSE) break;

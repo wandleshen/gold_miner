@@ -1,4 +1,4 @@
-//#define DEBUG
+#define DEBUG
 #ifdef DEBUG 
 #include "codes/drawing.h"
 #include "codes/event.h"

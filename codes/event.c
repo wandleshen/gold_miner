@@ -11,7 +11,8 @@ void MouseEventProcess(int x, int y, int button, int event){
 	//printf("x:%d,y:%d",x,y);
 	double mouseX = ScaleXInches(x);
 	double mouseY = ScaleYInches(y);
-	if (mouseX >= buttonArray[0].x && isInit) 
+	
+	if (event == BUTTON_DOWN && isInit) 
 		initPageEvent(x,y,button,event); //开始界面按钮（帮助/排行榜/退出，未完成开始游戏和继续游戏） 
 	if ((mouseY >= GetWindowHeight() - 0.5 || isMenu) && !isInit)  //有关菜单操作的MouseEvent 
 		menuMouseEvent(x, y, button, event);
@@ -23,10 +24,7 @@ void MouseEventProcess(int x, int y, int button, int event){
 void KeyboardEventProcess(int key, int event){
 	
 	if(isRanking && key == VK_ESCAPE && event == KEY_DOWN){
-		isRanking = 0;
-		for(int i = 0;i<5;i++) buttonArray[i].isDisabled = FALSE;
-		clearScreen();
-		drawIniPage();
+		reDrawIniPage();
 	}
 	
 	else{

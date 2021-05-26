@@ -51,7 +51,9 @@ void defineColor(){
 	DefineColor("pants", 204 / 256.0, 102 / 256.0, 0 / 256.0);
 	DefineColor("shadowYellow", 204 / 256.0, 204 / 256.0, 0 / 256.0);
 	DefineColor("Beige", 245 / 256.0, 245 / 256.0, 220 / 256.0);
+	DefineColor("shadowBlue", 0 / 256.0, 204 / 256.0, 204 / 256.0);
 }
+
 
 void drawBlock(block tar){
 	string color[5];
@@ -462,8 +464,16 @@ void showRank(){
 	}
 	movePenRelative(0,fontHeight);
 
+		
+	MovePen(wWidth/2-4*fontSize,wHeight/2-2);
+	SetPenColor("shadowBlue");
+	drawRec(8*fontSize,2*fontHeight);
+	MovePen(wWidth/2-2*fontSize,wHeight/2-2+fontHeight);
+	//MovePen(wWidth/2-2*fontSize,wHeight/2-2);
 	
-	
+	SetPenColor("Beige");
+	DrawTextString("¹Ø±Õ");
+	 
 	isRanking = 1;
 } 
 
@@ -476,6 +486,12 @@ void eraseBlock(block tar){
 	SetEraseMode(0);
 }
 
+void reDrawIniPage(){
+	isRanking = 0;
+	for(int i = 0;i<5;i++) buttonArray[i].isDisabled = FALSE;
+	clearScreen();
+	drawIniPage();
+}
 void clearScreen(){
 	MovePen(0,0);
 	string color = GetPenColor();
