@@ -139,21 +139,40 @@ void drawBlock(block tar){
 }
 
 void drawIniPage(){
-    string text[5] = {"退出游戏","游戏帮助","排行榜","继续游戏","开始游戏"};
+	static int flag = 0;
+	//第一次进入的时候执行初始化 
+	if(flag == 0){
+		buttonXPos = (widthRatio+0.5+indent)*wWidth;
+		for(int i = 0;i<5;i++){
+			buttonYPos[i] = ((4-i+1.7)*heightRatio)*wHeight;
+		}
+		flag = 1;
+	}
+    string text[5] = {"开始游戏","继续游戏","排行榜","游戏帮助","退出游戏"};
+	for(int i = 0;i<5;i++){
+		buttonArray[i].x = buttonXPos;
+		buttonArray[i].y = buttonYPos[i];
+		strcpy(buttonArray[i].text, text[i]);
+		printf("%lf %lf %s\n",buttonArray[i].x,buttonArray[i].y,buttonArray[i].text);
+		buttonArray[i].isDisabled = FALSE;
+	}
     block *tempBlock = (block*)malloc(sizeof(block));
     tempBlock->size = (0.1+heightRatio)*wHeight;
     tempBlock->type = GOLD;
     tempBlock->x = (widthRatio+0.68)*wWidth;
-    tempBlock->y = (0.1+heightRatio)*wHeight;
-    SetPenColor("background");
+    tempBlock->y = (0.1+heightRatio*5)*wHeight;
+    SetPenColor("Beige");
     drawRec(wWidth,wHeight);
     for(int i = 0;i<5;i++){
         drawBlock(*tempBlock);
         SetPenColor("black");
-        MovePen((widthRatio+0.5+indent)*wWidth,((1.7+i)*heightRatio)*wHeight);
-        DrawTextString(text[i]);
-        tempBlock->y += heightRatio*wHeight;
+        MovePen(buttonArray[i].x,buttonArray[i].y);
+        tempBlock->y -= heightRatio*wHeight;
     }
+    for(int i = 0;i<5;i++){
+    	MovePen(buttonArray[i].x,buttonArray[i].y);
+    	DrawTextString(buttonArray[i].text);
+	}
 	free(tempBlock);
 	drawHaiMian(wWidth, wHeight, 0.15 * wWidth, 0.1 * wHeight, 0.02 * wWidth);
 }
@@ -410,6 +429,44 @@ void drawStore(){
 	SetPointSize(15);
 }
 
+void showRank(){
+	for(int i = 0;i<5;i++) buttonArray[i].isDisabled = TRUE;
+	char buffer[30];
+
+	double fontSize = TextStringWidth("1");
+	double fontHeight = GetFontHeight();
+	SetPenColor("edgeGold");
+	
+	MovePen(wWidth/2-2,wHeight/2+2);
+	drawRec(4,-4);
+	SetPenColor("red");
+	MovePen(wWidth/2-2*fontSize,wHeight/2+2-fontHeight);
+	DrawTextString("Rank");
+	MovePen(wWidth/2-2,wHeight/2+2-2*fontHeight);
+	DrawTextString(" username               level                 score ");
+	
+	
+	loadRank();
+	List move = userHead->next;
+	int count = 0;
+	while(move != NULL){
+		//以下不直接使用一个sprintf再Draw并且Draw了一堆空格而不是使用%xd的原因是本地测试这样做会导致只能显示两个用户的数据（不知道为什么），同时调整第二个%d的输出位数的话会导致第三个数据（score）无法显示，可以测试一下 
+		MovePen(wWidth/2-2,wHeight/2+2-(2*count+4)*fontHeight);
+		sprintf(buffer," %-27s %d ",move->userName,move->level);  
+		DrawTextString(buffer);
+		DrawTextString("                       ");
+		sprintf(buffer,"%d ",move->score);
+		DrawTextString(buffer);
+		count++;
+		move = move->next;
+	}
+	movePenRelative(0,fontHeight);
+
+	
+	
+	isRanking = 1;
+} 
+
 void eraseBlock(block tar){
 	double length = (tar.size + 1) * PIXELSIZE;
 	MovePen(tar.x, tar.y);
@@ -417,4 +474,12 @@ void eraseBlock(block tar){
 	movePenRelative(-4 * length, 4 * length);
 	drawRec(10 * length, -9 * length);
 	SetEraseMode(0);
+}
+
+void clearScreen(){
+	MovePen(0,0);
+	string color = GetPenColor();
+	SetPenColor("white");
+	drawRec(wWidth,wHeight);
+	SetPenColor(color);
 }
