@@ -54,3 +54,8 @@ typedef struct{
 } player;
 ```
 
+## TODO
+
+- menu.c 有关游戏菜单(暂停、静音、金手指）内容
+
+- file.c输入用户名登录排行榜的内容

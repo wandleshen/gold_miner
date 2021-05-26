@@ -1,7 +1,7 @@
 [Project]
 FileName=graphics.dev
 Name=graphics
-UnitCount=29
+UnitCount=31
 Type=0
 Ver=2
 ObjFiles=
@@ -300,18 +300,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit26]
-FileName=codes\store.c
-CompileCpp=0
-Folder=codes
-Compile=0
-Link=0
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit27]
-FileName=codes\store.h
+FileName=codes\initPage.c
 CompileCpp=0
 Folder=codes
 Compile=1
@@ -321,7 +311,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit28]
-FileName=codes\initPage.h
+FileName=codes\game.c
 CompileCpp=0
 Folder=codes
 Compile=1
@@ -331,7 +321,37 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit29]
-FileName=codes\initPage.c
+FileName=codes\game.h
+CompileCpp=0
+Folder=codes
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit26]
+FileName=codes\initPage.h
+CompileCpp=0
+Folder=codes
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit30]
+FileName=codes\store.c
+CompileCpp=0
+Folder=codes
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit31]
+FileName=codes\store.h
 CompileCpp=0
 Folder=codes
 Compile=1

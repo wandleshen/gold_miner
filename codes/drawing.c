@@ -52,6 +52,9 @@ void defineColor(){
 	DefineColor("shadowYellow", 204 / 256.0, 204 / 256.0, 0 / 256.0);
 	DefineColor("Beige", 245 / 256.0, 245 / 256.0, 220 / 256.0);
 	DefineColor("shadowBlue", 0 / 256.0, 204 / 256.0, 204 / 256.0);
+	DefineColor("lightMiner", 144 / 256.0, 79 / 256.0, 14 / 256.0);
+	DefineColor("darkMiner", 78 / 256.0, 42 / 256.0, 2 / 256.0);
+	DefineColor("greyMiner", 128 / 256.0, 128 / 256.0, 128 / 256.0);
 }
 
 

@@ -71,7 +71,8 @@ void storeMouseEvent(int x, int y, int button, int event){  //商店鼠标事件
 				&& mouseY >= wHeight - 1 && mouseY <= wHeight - 0.6){
 					isStore = 0;
 					isGame = 1;
-					//drawGame();  //绘制游戏画面 #TODO 
+					++currentStatus.level;
+					initGame();
 				}
 			if (mouseX >= wWidth - 2 && mouseX <= wWidth - 1
 				&& mouseY >= wHeight - 1.5 && mouseY <= wHeight - 1.1){
@@ -85,7 +86,7 @@ void storeMouseEvent(int x, int y, int button, int event){  //商店鼠标事件
 void buyStuff(int i){
 	if (currentStatus.money >= PRICE(i) && currentStatus.grades[i] < 5){
 		showStoreBox(1);
-		if (isAgree){
+		if (isAgree){  //完成交易 
 			currentStatus.money -= PRICE(i);
 			++currentStatus.grades[i];
 			isAgree = 0;

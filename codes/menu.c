@@ -9,6 +9,7 @@ void drawHelp();  //绘出帮助菜单
 int isShow[3] = {0, 0, 0};  //三个二级菜单显示情况 
 int flag = 0;  //表示是否呼出确认框 
 int i = -1;
+static int isPaused = 0;  //奇奇怪怪莫名其妙的flag，但是想不出更好的方法解决这件事儿
 
 void drawMenu(){  //绘出顶部菜单栏 
 	SetPenColor("Blue");
@@ -58,7 +59,7 @@ void showBox(int i){  //展示二次确认框
 void menuMouseEvent(int x, int y, int button, int event){
 	double mouseX = ScaleXInches(x);
 	double mouseY = ScaleYInches(y);
-	
+
 	switch(event){
 		case BUTTON_DOWN:
 			
@@ -67,6 +68,8 @@ void menuMouseEvent(int x, int y, int button, int event){
 					&& mouseX >= GetWindowWidth() / 2 - 0.3 && mouseX <= GetWindowWidth() / 2 + 0.9){
 					if (i == 1){
 						loadGame();
+						isStore = 1;
+						isGame = 0;
 						drawStore();
 					}
 					if (i == 0){
@@ -77,7 +80,10 @@ void menuMouseEvent(int x, int y, int button, int event){
 				else{
 					if (isStore)
 						drawStore();
-					//else if (isGame)  //画出游戏界面  #TODO 
+					if (isGame && !isPaused)
+						pauseGame();  //继续游戏
+					if (isGame && isPaused)
+							drawMainGame();
 						
 				}
 				i = -1;
@@ -86,6 +92,8 @@ void menuMouseEvent(int x, int y, int button, int event){
 			}
 			
 			if (mouseY >= GetWindowHeight() - H){  //绘制最顶层对应菜单的二级菜单
+				if (isGame && !isPaused)
+					pauseGame();
 				if (mouseX <= W){
 					isShow[2] = 0;
 					isShow[1] = 0;
@@ -95,10 +103,16 @@ void menuMouseEvent(int x, int y, int button, int event){
 					//对应的菜单要最后画，以免被擦除 
 					if (isShow[0] == 0){
 						drawGame();
-						drawStore();
+						if (isStore)
+							drawStore();
+						if (isGame && !isPaused)  //没暂停
+							pauseGame();
 					}
 					else{
-						drawStore();
+						if (isStore)
+							drawStore();
+						if (isGame)
+							drawMainGame();
 						drawGame();
 					}
 
@@ -111,10 +125,16 @@ void menuMouseEvent(int x, int y, int button, int event){
 					drawGame();
 					if (isShow[1] == 0){
 						drawTrainer();
-						drawStore();
+						if (isStore)
+							drawStore();
+						if (isGame && !isPaused)
+							pauseGame();
 					}
 					else{
-						drawStore();
+						if (isStore)
+							drawStore();
+						if (isGame)
+							drawMainGame();
 						drawTrainer();
 					}
 				}
@@ -126,10 +146,16 @@ void menuMouseEvent(int x, int y, int button, int event){
 					drawTrainer();
 					if (isShow[2] == 0){
 						drawHelp();
-						drawStore();
+						if (isStore)
+							drawStore();
+						if (isGame && !isPaused)
+							pauseGame();
 					}
 					else{
-						drawStore();
+						if (isStore)
+							drawStore();
+						if (isGame)
+							drawMainGame();
 						drawHelp();
 					}
 				}
@@ -146,28 +172,45 @@ void menuMouseEvent(int x, int y, int button, int event){
 				isShow[2] = 0;
 				drawHelp();
 				isMenu = 0;
-				drawStore();
+				if (isStore)
+					drawStore();
+				if (isGame)
+					pauseGame();
 			}
 			
-			else if (isShow[1]){  //有关修改器菜单的内容  #TODO 
+			else if (isShow[1]){  //有关修改器菜单的内容
 				if (mouseX >= W && mouseX <= 2 * W){
+					if (mouseY >= GetWindowHeight() - 2 * H){  //上帝模式  #TODO
+
+					}
+					else if (mouseY >= GetWindowHeight() - 3 * H){  //更多时间
+						if (isGame)
+							countdown += 15000;
+					}
+					else if (mouseY >= GetWindowHeight() - 4 * H){  //无限金钱
+						currentStatus.money = 9999999;
+					}
 				}
 				isShow[1] = 0;
 				drawTrainer();
 				isMenu = 0;
-				drawStore();
+				if (isStore)
+					drawStore();
+				if (isGame)
+					pauseGame();
 			}
 			
-			else if (isShow[0]){  //有关游戏菜单的内容  #TODO
+			else if (isShow[0]){  //有关游戏菜单的内容
 				if (mouseX <= W){
 					if (mouseY >= GetWindowHeight() - 2 * H){  //载入游戏 
 						flag = 1;
 						i = 1;
 					}
 					else if (mouseY >= GetWindowHeight() - 3 * H){  //暂停 
-						
+						if (isGame)
+							isPaused = 1 - isPaused;
 					}
-					else if (mouseY >= GetWindowHeight() - 4 * H){  //静音 
+					else if (mouseY >= GetWindowHeight() - 4 * H){  //静音  #TODO
 						
 					}
 					else if (mouseY >= GetWindowHeight() - 5 * H){  //退出 
@@ -178,7 +221,12 @@ void menuMouseEvent(int x, int y, int button, int event){
 				isShow[0] = 0;
 				drawGame();
 				isMenu = 0;
-				drawStore();
+				if (isStore)
+					drawStore();
+				if (isGame && flag || isPaused)
+					drawMainGame();
+				if (isGame && !flag && !isPaused)
+					pauseGame();
 				if (flag){
 					showBox(i);
 					isMenu = 1;  //继续调用menu相关操作 
@@ -203,18 +251,30 @@ void menuKeyboardEvent(int key, int event){
 					isMenu = 1;
 					break;
 				case 'P': case 'p':  //Pause
+					pauseGame();
 					break;
 				case 'M': case 'm':  //Mute
 					break;
 				case 'E': case 'e':  //Exit
+					showBox(0);
+					flag = 1;
+					i = 0;
+					isMenu = 1;
 					break;
 				case 'Y': case 'y':
 					if (flag){
-						if (i == 1)
+						if (i == 1){
 							loadGame();
+							isStore = 1;
+							isGame = 0;
+							drawStore();
+						}
 						if (i == 0){
 							MovePen(0, 0);
 							drawIniPage();
+							isStore = 0;
+							isGame = 0;
+							isInit = 1;
 						}
 						i = -1;
 						flag = 0;
@@ -225,7 +285,10 @@ void menuKeyboardEvent(int key, int event){
 					if (flag){
 						if (isStore)
 							drawStore();
-						//else if (isGame)  //画出游戏界面  #TODO 
+						if (isGame && isPaused)
+							drawMainMenu();
+						if (isGame && !isPaused)
+							pauseGame();
 						i = -1;
 						flag = 0;
 						isMenu = 0;

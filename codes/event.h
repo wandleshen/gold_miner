@@ -6,8 +6,10 @@
 #include "menu.h"
 #include "store.h"
 #include "initPage.h"
+#include "game.h"
 
-void MouseEventProcess(int x, int y, int button, int event);  //ÓÃÓÚ·ÖÅä¸÷ÖÖeventÇé¿ö 
+void MouseEventProcess(int x, int y, int button, int event);  //ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½eventï¿½ï¿½ï¿½ 
 void KeyboardEventProcess(int key, int event);
+void TimerEventProcess(int timerID);
 
 #endif
