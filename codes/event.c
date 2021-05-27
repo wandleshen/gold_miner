@@ -3,8 +3,8 @@
 
 int isMenu = 0;  //是否是菜单操作 
 int isStore = 0;  //是否是商店界面 
-int isInit = 0;  //是否是初始界面 
-int isGame = 1;  //是否是游戏界面 
+int isInit = 1;  //是否是初始界面 
+int isGame = 0;  //是否是游戏界面 
 int isRanking = 0; //是否正在显示排行榜 
 
 void MouseEventProcess(int x, int y, int button, int event){

@@ -4,6 +4,22 @@ void quitGame(){
 	ExitGraphics();
 }
 
+void disableButton(int id){
+	buttonArray[id].isDisabled = TRUE;
+}
+void disableAllButton(){
+	for(int i = 0; i < 5; i++){
+		buttonArray[i].isDisabled = TRUE;
+	}
+}
+void enableButton(int id){
+	buttonArray[id].isDisabled = FALSE;
+}
+void enableAllButton(){
+	for(int i = 0; i < 5; i++){
+		buttonArray[i].isDisabled = FALSE;
+	}
+}
 void gameHelp(){
 	system("notepad _help");
 }
@@ -42,8 +58,17 @@ void initPageEvent(int x, int y, int button, int event){
 							break;
 						case 3:
 							//继续游戏
+							isGame = 1;
+							isInit = 0;
+							loadGame();
+							initGame();
 						case 4:
 							//开始游戏
+							initGame();
+							stopBGM();
+							isGame = 1;
+							isInit = 0;
+							welcomeMusic();
 						default:
 							break;
 				}

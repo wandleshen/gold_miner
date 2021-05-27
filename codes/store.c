@@ -54,6 +54,7 @@ void storeMouseEvent(int x, int y, int button, int event){  //商店鼠标事件
 				else
 					isAgree = 0;
 				isDone = 1;
+				purchaseMusic();
 				buyStuff(tar);
 			}
 			else {
@@ -69,6 +70,7 @@ void storeMouseEvent(int x, int y, int button, int event){  //商店鼠标事件
 			
 			if (mouseX >= wWidth - 2 && mouseX <= wWidth - 1  //下一关
 				&& mouseY >= wHeight - 1 && mouseY <= wHeight - 0.6){
+					welcomeMusic();
 					isStore = 0;
 					isGame = 1;
 					++currentStatus.level;

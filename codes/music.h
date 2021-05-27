@@ -19,6 +19,10 @@ void levelChangeMusic();/*关卡切换音乐*/
 void addScoreMusic();/*分数增加的时候播放加分音效*/
 void diamondMusic();/*抓到钻石*/
 void goldMusic();/*抓到金矿*/
-void bombMusic();/*使用炸弹的时候播放，但是实际测试的时候发现有一到两秒的延迟（指从音效播放开始计时）*/
+void rockMusic();/*抓到石头*/
+void purchaseMusic();/*确认购买物品*/
+void digMusic();/*放出钩子*/
+
+
 
 #endif

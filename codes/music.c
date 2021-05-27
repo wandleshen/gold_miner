@@ -24,39 +24,38 @@ void stopBGM(){
 }
 
 void welcomeMusic(){
-  PlaySound("..\\media_src\\music\\welcomemusic",0,SND_ASYNC | SND_LOOP);
+  PlaySound("media_src\\music\\welcomemusic",0,SND_ASYNC | SND_LOOP);
 }
 
 void levelChangeMusic(){
-  mciSendString(TEXT("play \"..\\media_src\\music\\levelChange.wav\" "),NULL,0,NULL);
+  mciSendString(TEXT("play \"media_src\\music\\levelChange.wav\" "),NULL,0,NULL);
 }
  
 void addScoreMusic(){
-  mciSendString(TEXT("play \"..\\media_src\\music\\addScore.wav\" "),NULL,0,NULL);
+  mciSendString(TEXT("play \"meida_src\\music\\addScore.wav\" "),NULL,0,NULL);
 }
 
 void diamondMusic(){
-  mciSendString(TEXT("play \"..\\media_src\\music\\diamond.wav\" "),NULL,0,NULL);
+  mciSendString(TEXT("play \"media_src\\music\\diamond.wav\" "),NULL,0,NULL);
 }
 
 
 void goldMusic(){
-  mciSendString(TEXT("play \"..\\media_src\\music\\gold.wav\" "),NULL,0,NULL);
+  mciSendString(TEXT("play \"media_src\\music\\gold.wav\" "),NULL,0,NULL);
+}
+void rockMusic(){
+	mciSendString(TEXT("play \"media_src\\music\\rock.wav\" "),NULL,0,NULL);
 }
 
 
-void bombMusic(){
-  mciSendString(TEXT("play \"..\\media_src\\music\\bomb.wav\" "),NULL,0,NULL);
+void purchaseMusic(){
+	mciSendString(TEXT("play \"media_src\\music\\buy.wav\" "),NULL,0,NULL);
+}
+
+void digMusic(){
+	mciSendString(TEXT("play \"media_src\\music\\dig.wav\" "),NULL,0,NULL);
 }
 
 
 
 
-#ifdef DEBUG 
-int main(){
-  //loopPlayMusic(".\\musicSrc\\bomb.wav");
-  levelChangeMusic();
-  getchar();
-}
-
-#endif

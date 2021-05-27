@@ -142,8 +142,9 @@ void drawBlock(block tar){
 	movePenRelative(length, length);
 	drawRec(4 * length, length);
 }
-
+ 
 void drawIniPage(){
+	welcomeMusic();
 	static int flag = 0;
 	//第一次进入的时候执行初始化 
 	if(flag == 0){
@@ -421,7 +422,7 @@ void drawStore(){
 	MovePen(wWidth - 1.9, wHeight - 0.9);
 	DrawTextString("继续游戏");
 	
-	MovePen(wWidth - 2, wHeight - 1.5);
+	MovePen(wWidth - 2, wHeight - 1.5); 
 	DrawLine(1, 0);
 	DrawLine(0, 0.4);
 	DrawLine(-1, 0);

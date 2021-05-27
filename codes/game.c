@@ -19,7 +19,7 @@ double currentLength;  //钩子当前位置
 const double length = PIXELSIZE / 1.05;  //长度常数
 static int dScore, dMoney;  //改变的加分和金钱
 double dTheta;
-
+ 
 void drawMiner();  //绘出矿机 
 linkBlock* initBlocks();  //生成矿物（双向链表，头链表(head)不储存数据） 
 
@@ -27,6 +27,8 @@ linkBlock* link;  //矿物链
 linkBlock* thisRock;  //特定矿物
 
 void initGame(){  //初始化新一局游戏
+	isGame = 1;
+	
 	angle = PI;
 	Randomize();
 	currentLength = initLength;  //初始化钩子位置
@@ -195,8 +197,10 @@ linkBlock* initBlocks(){  //生成矿物（双向链表，头链表(head)不储存数据）
 }
 
 void gameKeyboardEvent(int key, int event){  //放下钩子
-	if(event == KEY_DOWN && (key == VK_DOWN || key == 's' || key == 'S') && condition == WAIT)
+	if(event == KEY_DOWN && (key == VK_DOWN || key == 's' || key == 'S') && condition == WAIT){
+		digMusic();
 		condition = DOWN;
+	}
 }
 
 void pauseGame() //暂停或者继续游戏游戏
@@ -218,8 +222,7 @@ void pauseGame() //暂停或者继续游戏游戏
 void drawScore(){  //绘出加分
 	static double time = 0;
 	static double dTime = 0.001;
-	static char s[10];
-	
+	static char s[10]; 
 	MovePen(1.0, wHeight * 5 / 6 + 0.1 + time);
 	sprintf(s, "+%d    +%d", dMoney, dScore);
 	DrawTextString(s);
@@ -237,7 +240,8 @@ void gameTimer(int timerID){
 		case TIMER:
 			anime();
 			break;
-		case WIN:
+		case WIN: 
+			levelChangeMusic();
 			if(mbflag){
 				mbflag = 0;
 				MessageBox(NULL, "恭喜过关，正在进入商店~", "成功", MB_OK);
@@ -250,8 +254,10 @@ void gameTimer(int timerID){
 		case LOSE:
 			isGame = 0;
 			isInit = 1;
+			disableButton(2);
+			disableButton(3);
 			//输入用户名输入成绩  #TODO
-			drawIniPage();
+			
 			cancelTimer(LOSE);
 			break;
 		case SCORE:
@@ -270,11 +276,13 @@ void anime(){
 	countdown -= refreshRate;
 
 	if(countdown <= 0){
+		stopBGM(); 
 		cancelTimer(TIMER);
 		mbflag = 1;
 		if(currentStatus.score >= target)
 			startTimer(WIN, 500);
 		else
+			drawIniPage();
 			startTimer(LOSE, 500);
 		return;
 	}
@@ -288,6 +296,19 @@ void anime(){
 			currentLength += speed;
 			thisRock = getRock();
 			if (thisRock){  //抓到矿石
+				switch(thisRock->element.type){
+					case GOLD:
+						goldMusic();
+						break;
+					case  DIAMOND:
+						diamondMusic();
+						break;
+					case STONE:
+						rockMusic();
+						break;
+					default:
+						break;
+				}
 				condition = UP;
 				thisSpeed = speed / (double)(thisRock->element.size + 2);
 			}
@@ -306,6 +327,7 @@ void anime(){
 				condition = WAIT;
 				if(thisRock){  //得分 音效 #TODO
 					if(thisRock->element.type == GOLD){
+						goldMusic();
 						dScore = 200 * (1 + thisRock->element.size + currentStatus.grades[moreScore]);
 						dMoney = 200 * (1 + thisRock->element.size);
 					}
@@ -314,6 +336,7 @@ void anime(){
 						dMoney = 50 * (1 + thisRock->element.size + currentStatus.grades[stoneValue]);
 					}
 					else{
+						diamondMusic();
 						dScore = 600 * (currentStatus.grades[moreScore] + 1);
 						dMoney = 800;
 					}
