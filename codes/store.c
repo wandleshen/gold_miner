@@ -67,14 +67,14 @@ void storeMouseEvent(int x, int y, int button, int event){  //商店鼠标事件
 				}
 			}
 			
-			if (mouseX >= wWidth - 2 && mouseX <= wWidth - 1
+			if (mouseX >= wWidth - 2 && mouseX <= wWidth - 1  //下一关
 				&& mouseY >= wHeight - 1 && mouseY <= wHeight - 0.6){
 					isStore = 0;
 					isGame = 1;
 					++currentStatus.level;
 					initGame();
 				}
-			if (mouseX >= wWidth - 2 && mouseX <= wWidth - 1
+			if (mouseX >= wWidth - 2 && mouseX <= wWidth - 1  //保存游戏
 				&& mouseY >= wHeight - 1.5 && mouseY <= wHeight - 1.1){
 					saveGame();
 					MessageBox(NULL,"保存成功","完成",0);

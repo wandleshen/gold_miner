@@ -24,10 +24,18 @@ typedef enum{
 	PAUSE
 };
 
+typedef enum{
+	hookSpeed,
+	moreScore,
+	stoneValue,
+	hookSize
+};
+
 extern User currentStatus;
 extern int isGame;
 extern int isStore;
 extern int isInit;
+extern int speedKey;  //from menu.h  超级速度开关
 void initGame();
 void gameKeyboardEvent(int key, int event);
 void gameTimer(int timerID);

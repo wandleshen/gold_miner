@@ -6,38 +6,44 @@
 #define TIMER 1
 #define WIN 2
 #define LOSE 3
+#define SCORE 4
 #define refreshRate 10
 #define realX wWidth / 2 - 8 * length + currentLength * cos(angle)
 #define realY wHeight - 1.4 + 2 * length - currentLength * sin(angle)
 #define initLength 0.3
 
+int mbflag = 0;  //MessageBox的flag
 int target, countdown, condition;  //目标分数/时间/状态
 double angle;  //钩子旋转角度
 double currentLength;  //钩子当前位置
 const double length = PIXELSIZE / 1.05;  //长度常数
+static int dScore, dMoney;  //改变的加分和金钱
+double dTheta;
 
 void drawMiner();  //绘出矿机 
 linkBlock* initBlocks();  //生成矿物（双向链表，头链表(head)不储存数据） 
 
-linkBlock* link;
+linkBlock* link;  //矿物链
+linkBlock* thisRock;  //特定矿物
 
 void initGame(){  //初始化新一局游戏
-	angle = PI / 20;
+	angle = PI;
 	Randomize();
 	currentLength = initLength;  //初始化钩子位置
 	link = initBlocks();
 	condition = WAIT;
 	target = 100 * (currentStatus.level + 1) * (currentStatus.level + 2);
-	countdown = 60000;
+	countdown = 6000;
+	dTheta = 0;
 	drawMainGame();
 	startTimer(TIMER, refreshRate);
 }
 
 void drawTarget(){
 	char s[50];
-    sprintf(s, " 当前分数：%d  目标分数：%d  剩余时间：%ds", currentStatus.score, target, countdown / 1000);
+    sprintf(s, "当前金钱:%d 当前分数:%d 目标分数:%d 剩余时间:%ds", currentStatus.money, currentStatus.score, target, countdown / 1000);
 
-    MovePen(0.5, wHeight * 5 / 6);
+    MovePen(0.1, wHeight * 5 / 6);
     DrawTextString(s);
 }
 
@@ -133,6 +139,22 @@ int isCovered(linkBlock* head, block tar){
 	return 0;
 }
 
+linkBlock* getRock(){  //判断是否获得矿物  目前来看不稳定
+	linkBlock* anchor = link;
+	double targetDistance, dx, dy;
+
+	while(anchor->next){
+		anchor = anchor->next;
+		dx = realX - anchor->element.x;
+		dy = realY - anchor->element.y;
+		targetDistance = (anchor->element.size + 1.0) * PIXELSIZE * (currentStatus.grades[hookSize] + 6.0);
+		if (dx * dx + dy * dy <= targetDistance * targetDistance)
+			return anchor;
+	}
+
+	return NULL;
+}
+
 linkBlock* initBlocks(){  //生成矿物（双向链表，头链表(head)不储存数据） 
 	int numbers[6];
 	int flag = 0;  //防止循环卡死 
@@ -154,9 +176,11 @@ linkBlock* initBlocks(){  //生成矿物（双向链表，头链表(head)不储存数据）
 			next = (linkBlock*)malloc(sizeof(linkBlock));
 			rock.size = i % 3;
 			rock.type = (i < 3) ? 0 : (i < 5) ? 1 : 2;  //小于3是GOLD， 小于5是STONE，5是DIAMOND
+			if (i == DDIAMOND)
+				rock.size = 0;
 			do{
 				rock.x = RandomReal(0.1 + 4 * PIXELSIZE * (rock.size + 1), wWidth - 0.1 - 4 * PIXELSIZE * (rock.size + 1));
-				rock.y = RandomReal(5 * PIXELSIZE * (rock.size + 1), wHeight - 1.6 - 8 * PIXELSIZE * (rock.size + 1));
+				rock.y = RandomReal(5 * PIXELSIZE * (rock.size + 1), wHeight - 1.6 - 10 * PIXELSIZE * (rock.size + 1));
 				++flag;
 			} while(isCovered(head, rock) && flag <= 50);
 			next->element = rock;
@@ -175,18 +199,37 @@ void gameKeyboardEvent(int key, int event){  //放下钩子
 		condition = DOWN;
 }
 
-void pauseGame() //暂停游戏
+void pauseGame() //暂停或者继续游戏游戏
 {
     static int preCondition;
     if (condition == PAUSE){  //恢复暂停的游戏
         condition = preCondition;
 	    startTimer(TIMER, refreshRate);
+		drawMainGame();
     }
     else{  //暂停操作
         preCondition = condition;
         condition = PAUSE;
         cancelTimer(TIMER);
+		drawMainGame();
     }
+}
+
+void drawScore(){  //绘出加分
+	static double time = 0;
+	static double dTime = 0.001;
+	static char s[10];
+	
+	MovePen(1.0, wHeight * 5 / 6 + 0.1 + time);
+	sprintf(s, "+%d    +%d", dMoney, dScore);
+	DrawTextString(s);
+	time += dTime;
+
+	if (time >= 0.05){
+		time = 0;
+		cancelTimer(SCORE);
+
+	}
 }
 
 void gameTimer(int timerID){
@@ -195,9 +238,12 @@ void gameTimer(int timerID){
 			anime();
 			break;
 		case WIN:
+			if(mbflag){
+				mbflag = 0;
+				MessageBox(NULL, "恭喜过关，正在进入商店~", "成功", MB_OK);
+			}
 			isGame = 0;
 			isStore = 1;
-			MessageBox(NULL,"恭喜过关，即将进入商店~","成功",0);
 			drawStore();
 			cancelTimer(WIN);
 			break;
@@ -208,32 +254,77 @@ void gameTimer(int timerID){
 			drawIniPage();
 			cancelTimer(LOSE);
 			break;
+		case SCORE:
+			drawScore();
+			break;
 	}
 }
 
 void anime(){
-	static double dTheta = 0;
 	static double thisSpeed;
-	double speed = 0.075 + 0.025 * currentStatus.grades[0];
+	double speed = 0.045 + 0.01 * currentStatus.grades[hookSpeed];
+	if (speedKey)
+		speed = 0.15;
 
 	thisSpeed = speed;
 	countdown -= refreshRate;
+
+	if(countdown <= 0){
+		cancelTimer(TIMER);
+		mbflag = 1;
+		if(currentStatus.score >= target)
+			startTimer(WIN, 500);
+		else
+			startTimer(LOSE, 500);
+		return;
+	}
+
 	switch(condition){
 		case WAIT:  //钩子愉快环绕
 			dTheta += 0.001 * cos(angle);
         	angle += dTheta;
 			break;
-		case DOWN:  //钩子下降  有关抓取矿石#TODO
+		case DOWN:  //钩子下降
 			currentLength += speed;
-			if (realX <= 0.0 || realX >= wWidth || realY <= 0.0){
+			thisRock = getRock();
+			if (thisRock){  //抓到矿石
+				condition = UP;
+				thisSpeed = speed / (double)(thisRock->element.size + 2);
+			}
+			else if (realX <= 0.0 || realX >= wWidth || realY <= 0.0){
             	condition = UP;
             	thisSpeed = 2 * speed;
         	}
 			break;
 		case UP:  //钩子上升
 			currentLength -= thisSpeed;
+			if (thisRock){  //抓到矿石
+				thisRock->element.x += thisSpeed * cos(PI - angle);
+				thisRock->element.y += thisSpeed * sin(PI - angle);
+			}
 			if (fabs(currentLength - initLength) <= 0.01){
 				condition = WAIT;
+				if(thisRock){  //得分 音效 #TODO
+					if(thisRock->element.type == GOLD){
+						dScore = 200 * (1 + thisRock->element.size + currentStatus.grades[moreScore]);
+						dMoney = 200 * (1 + thisRock->element.size);
+					}
+					else if(thisRock->element.type == STONE){
+						dScore = 50 * (1 + thisRock->element.size + currentStatus.grades[moreScore]);
+						dMoney = 50 * (1 + thisRock->element.size + currentStatus.grades[stoneValue]);
+					}
+					else{
+						dScore = 600 * (currentStatus.grades[moreScore] + 1);
+						dMoney = 800;
+					}
+					thisRock->prev->next = thisRock->next;
+					if (thisRock->next)
+						thisRock->next->prev = thisRock->prev;
+					free(thisRock);
+					currentStatus.score += dScore;
+					currentStatus.money += dMoney;
+					startTimer(SCORE, refreshRate);
+				}
 			}
 			break;
 	}

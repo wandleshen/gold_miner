@@ -10,6 +10,7 @@ int isShow[3] = {0, 0, 0};  //三个二级菜单显示情况
 int flag = 0;  //表示是否呼出确认框 
 int i = -1;
 static int isPaused = 0;  //奇奇怪怪莫名其妙的flag，但是想不出更好的方法解决这件事儿
+int speedKey = 0;  //表示是否开启超级速度
 
 void drawMenu(){  //绘出顶部菜单栏 
 	SetPenColor("Blue");
@@ -92,7 +93,7 @@ void menuMouseEvent(int x, int y, int button, int event){
 			}
 			
 			if (mouseY >= GetWindowHeight() - H){  //绘制最顶层对应菜单的二级菜单
-				if (isGame && !isPaused)
+				if (isGame && !isPaused && !(isShow[0] + isShow[1] + isShow[2]))  //在逻辑混乱之中莫名其妙解决了一个问题（所以就这样吧，别动这坨屎山了）
 					pauseGame();
 				if (mouseX <= W){
 					isShow[2] = 0;
@@ -107,6 +108,9 @@ void menuMouseEvent(int x, int y, int button, int event){
 							drawStore();
 						if (isGame && !isPaused)  //没暂停
 							pauseGame();
+						if (isGame && isPaused)  //暂停了
+							drawMainGame();
+						isMenu = 0;
 					}
 					else{
 						if (isStore)
@@ -114,6 +118,7 @@ void menuMouseEvent(int x, int y, int button, int event){
 						if (isGame)
 							drawMainGame();
 						drawGame();
+						isMenu = 1;
 					}
 
 				}
@@ -127,8 +132,11 @@ void menuMouseEvent(int x, int y, int button, int event){
 						drawTrainer();
 						if (isStore)
 							drawStore();
-						if (isGame && !isPaused)
+						if (isGame && !isPaused)  //没暂停
 							pauseGame();
+						if (isGame && isPaused)  //暂停了
+							drawMainGame();
+						isMenu = 0;
 					}
 					else{
 						if (isStore)
@@ -136,6 +144,7 @@ void menuMouseEvent(int x, int y, int button, int event){
 						if (isGame)
 							drawMainGame();
 						drawTrainer();
+						isMenu = 1;
 					}
 				}
 				else{
@@ -148,8 +157,11 @@ void menuMouseEvent(int x, int y, int button, int event){
 						drawHelp();
 						if (isStore)
 							drawStore();
-						if (isGame && !isPaused)
+						if (isGame && !isPaused)  //没暂停
 							pauseGame();
+						if (isGame && isPaused)  //暂停了
+							drawMainGame();
+						isMenu = 0;
 					}
 					else{
 						if (isStore)
@@ -157,9 +169,9 @@ void menuMouseEvent(int x, int y, int button, int event){
 						if (isGame)
 							drawMainGame();
 						drawHelp();
+						isMenu = 1;
 					}
 				}
-				isMenu = 1;
 			}
 			
 			else if (isShow[2]){  //有关帮助菜单的内容
@@ -174,14 +186,16 @@ void menuMouseEvent(int x, int y, int button, int event){
 				isMenu = 0;
 				if (isStore)
 					drawStore();
-				if (isGame)
+				if (isGame && !isPaused)
 					pauseGame();
+				if (isGame && isPaused)
+					drawMainGame();
 			}
 			
 			else if (isShow[1]){  //有关修改器菜单的内容
 				if (mouseX >= W && mouseX <= 2 * W){
-					if (mouseY >= GetWindowHeight() - 2 * H){  //上帝模式  #TODO
-
+					if (mouseY >= GetWindowHeight() - 2 * H){  //究极速度  #TODO
+						speedKey = 1 - speedKey;
 					}
 					else if (mouseY >= GetWindowHeight() - 3 * H){  //更多时间
 						if (isGame)
@@ -196,8 +210,10 @@ void menuMouseEvent(int x, int y, int button, int event){
 				isMenu = 0;
 				if (isStore)
 					drawStore();
-				if (isGame)
+				if (isGame && !isPaused)
 					pauseGame();
+				if (isGame && isPaused)
+					drawMainGame();
 			}
 			
 			else if (isShow[0]){  //有关游戏菜单的内容
@@ -251,6 +267,7 @@ void menuKeyboardEvent(int key, int event){
 					isMenu = 1;
 					break;
 				case 'P': case 'p':  //Pause
+					isPaused = 1 - isPaused; 
 					pauseGame();
 					break;
 				case 'M': case 'm':  //Mute
@@ -286,7 +303,7 @@ void menuKeyboardEvent(int key, int event){
 						if (isStore)
 							drawStore();
 						if (isGame && isPaused)
-							drawMainMenu();
+							drawMainGame();
 						if (isGame && !isPaused)
 							pauseGame();
 						i = -1;
@@ -326,7 +343,7 @@ void drawGame(){  //绘出游戏菜单
 
 void drawTrainer(){  //绘出修改器菜单 
 	string text[3] = {
-		"God Mode",
+		"Higher Speed",
 		"More Time",
 		"Infinity Money"
 	};
