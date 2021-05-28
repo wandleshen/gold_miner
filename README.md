@@ -56,6 +56,4 @@ typedef struct{
 
 ## TODO
 
-- menu.c 有关游戏菜单(静音）内容
-
 - file.c输入用户名登录排行榜的内容

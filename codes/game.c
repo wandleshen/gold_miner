@@ -284,7 +284,6 @@ void anime(){
 		if(currentStatus.score >= target)
 			startTimer(WIN, 500);
 		else
-			drawIniPage();
 			startTimer(LOSE, 500);
 		return;
 	}
