@@ -61,6 +61,7 @@ void initPageEvent(int x, int y, int button, int event){
 							isGame = 1;
 							isInit = 0;
 							loadGame();
+							drawMenu();
 							initGame();
 						case 4:
 							//¿ªÊ¼ÓÎÏ·
@@ -68,6 +69,7 @@ void initPageEvent(int x, int y, int button, int event){
 							stopBGM();
 							isGame = 1;
 							isInit = 0;
+							drawMenu();
 							welcomeMusic();
 						default:
 							break;

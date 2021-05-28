@@ -64,7 +64,7 @@ void drawHook(){  //画钩子
 
 void drawMainGame(){  //绘出主要内容 
 	linkBlock* head;
-	SetPenColor("background");
+	SetPenColor("Beige");
 	MovePen(0, 0);
 	drawRec(wWidth, wHeight - 0.31);
 	drawHaiMian(wWidth, wHeight, 0.45 * wWidth, 0.8 * wHeight, 0.0025 * wWidth);
@@ -254,6 +254,8 @@ void gameTimer(int timerID){
 		case LOSE:
 			isGame = 0;
 			isInit = 1;
+			MovePen(0, 0);
+			drawIniPage(); 
 			disableButton(2);
 			disableButton(3);
 			//输入用户名输入成绩  #TODO

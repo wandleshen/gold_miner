@@ -361,7 +361,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit32]
-FileName=codes/music.c
+FileName=codes\music.c
 CompileCpp=0
 Folder=codes
 Compile=1
@@ -371,7 +371,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit33]
-FileName=codes/music.h
+FileName=codes\music.h
 CompileCpp=0
 Folder=codes
 Compile=1

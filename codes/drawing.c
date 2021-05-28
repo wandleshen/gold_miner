@@ -340,7 +340,7 @@ void drawStore(){
 	
 	SetFont("Î¢ÈíÑÅºÚ");
 	MovePen(0, 0);
-	SetPenColor("background");
+	SetPenColor("Beige");
     drawRec(wWidth, wHeight - 0.31);
     MovePen(wWidth / 2 - 0.6, wHeight - 1);
     
