@@ -11,7 +11,7 @@ int flag = 0;  //表示是否呼出确认框
 int i = -1;
 static int isPaused = 0;  //奇奇怪怪莫名其妙的flag，但是想不出更好的方法解决这件事儿
 int speedKey = 0;  //表示是否开启超级速度
-
+int isMusicPlaying = 1; //判断音乐是否在播放
 void drawMenu(){  //绘出顶部菜单栏 
 	SetPenColor("Blue");
 	MovePen(0, GetWindowHeight() - H);
@@ -227,7 +227,9 @@ void menuMouseEvent(int x, int y, int button, int event){
 							isPaused = 1 - isPaused;
 					}
 					else if (mouseY >= GetWindowHeight() - 4 * H){  //静音  #TODO
-						
+						if(isMusicPlaying) stopBGM();
+						else welcomeMusic();
+						isMusicPlaying = !isMusicPlaying; 
 					}
 					else if (mouseY >= GetWindowHeight() - 5 * H){  //退出 
 						flag = 1;

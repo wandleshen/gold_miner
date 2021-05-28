@@ -9,6 +9,7 @@
 #include <string.h>
 #pragma comment (lib , "winmm.lib")
 
+extern int isMusicPlaying;
 
 //主要函数
 void playMusic(char *sourceFilePath);/*通用播放函数，参数为音频源文件的相对路径或者是绝对路径，此文件只会被播放一次*/

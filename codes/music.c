@@ -11,11 +11,13 @@
 如果需要的是只播放一次，并且可以在其他音乐播放的时候同时播放的音乐，比如抓到钻石，购买物品等，那么调用mcisendString函数。
 */
 void playMusic(char *sourceFilePath){
+  if(isMusicPlaying == 0) return;
   char path[100] = "play ";
   strcat(path,sourceFilePath);
   mciSendString(path,NULL,0,NULL);
 }
 void loopPlayMusic(char *sourceFilePath){
+  if(isMusicPlaying == 0) return;
   PlaySound(sourceFilePath,0,SND_ASYNC | SND_LOOP);
 }
 
@@ -28,34 +30,37 @@ void welcomeMusic(){
 }
 
 void levelChangeMusic(){
+  if(isMusicPlaying == 0) return;
   mciSendString(TEXT("play \"media_src\\music\\levelChange.wav\" "),NULL,0,NULL);
 }
  
 void addScoreMusic(){
+  if(isMusicPlaying == 0) return;
   mciSendString(TEXT("play \"meida_src\\music\\addScore.wav\" "),NULL,0,NULL);
 }
 
 void diamondMusic(){
+  if(isMusicPlaying == 0) return;
   mciSendString(TEXT("play \"media_src\\music\\diamond.wav\" "),NULL,0,NULL);
 }
 
 
 void goldMusic(){
+  if(isMusicPlaying == 0) return;
   mciSendString(TEXT("play \"media_src\\music\\gold.wav\" "),NULL,0,NULL);
 }
 void rockMusic(){
+	if(isMusicPlaying == 0) return;
 	mciSendString(TEXT("play \"media_src\\music\\rock.wav\" "),NULL,0,NULL);
 }
 
 
 void purchaseMusic(){
+	if(isMusicPlaying == 0) return;
 	mciSendString(TEXT("play \"media_src\\music\\buy.wav\" "),NULL,0,NULL);
 }
 
 void digMusic(){
+  	if(isMusicPlaying == 0) return;
 	mciSendString(TEXT("play \"media_src\\music\\dig.wav\" "),NULL,0,NULL);
 }
-
-
-
-
