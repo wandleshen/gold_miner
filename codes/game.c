@@ -78,6 +78,7 @@ void drawMainGame(){  //绘出主要内容
 	}
 	drawTarget();
 	drawHook();
+	drawMenu();
 }
 
 void drawBackground(){  //绘出背景
@@ -86,7 +87,7 @@ void drawBackground(){  //绘出背景
 	MovePen(0, wHeight);
 	drawRec(wWidth, -1.4);
 	MovePen(0, wHeight - 1.4);
-	SetPenColor("lightBg");
+	SetPenColor("background");
 	drawRec(wWidth, -0.6);
 }
 

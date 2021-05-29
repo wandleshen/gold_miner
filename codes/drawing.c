@@ -43,7 +43,7 @@ void defineColor(){
 	DefineColor("Diamond", 61 / 255.0, 89 / 255.0, 171 / 255.0);
 	DefineColor("shadow",108 / 255.0, 97 / 255.0, 97 / 255.0);
 	DefineColor("shadowBrown", 102 / 255.0, 51 / 255.0, 0 / 255.0);
-	DefineColor("background", 204 / 255.0, 255 / 255.0, 255 / 255.0);
+	DefineColor("background", 214 / 255.0, 169 / 255.0, 102 / 255.0);
 	DefineColor("eye", 0 / 255.0, 51 / 255.0, 51 / 255.0);
 	DefineColor("shadowRed", 153 / 255.0, 0, 0);
 	DefineColor("tongue", 255 / 255.0, 102 / 255.0, 102 / 255.0);
