@@ -1,19 +1,9 @@
 #include "file.h"
-//#define DEBUG
 
 List userHead = NULL;
 List userTail = NULL;
 
 
-
-#ifdef DEBUG
-void print(){
-    printf("%d %d %d\n",currentStatus.level,currentStatus.score,currentStatus.money);
-    for(int i = 0;i<4;i++){
-        printf("%d\n",currentStatus.grades[i]);
-    }
-}
-#endif
 
 //将当前游戏状态存储到saveGame.txt中
 void saveGame(){
@@ -50,17 +40,6 @@ void loadGame(){
     fclose(fp);
 }
 
-//删除掉链表的最后一个节点，传入的指针至少是倒数第二个用户指针
-void removeLast(List head){
-    if(head == NULL || head->next == NULL) return;//由于调用这个函数的指针至少是倒数第二个用户，所以使用这样的逻辑判断
-    List pre = head, beh = head->next;
-    while(beh->next != NULL){
-        pre = beh;
-        beh = beh->next;
-    }
-    pre->next = NULL;
-    free(beh);
-}
 
 
 //如果当前用户的分数比获取到的用户列表中的任何一个人的分数更高，那么将该用户写入文件中，否则返回
@@ -81,10 +60,9 @@ void insertUser(User curr){
     List newUser = (List)malloc(sizeof(struct userRank));
     newUser->level = curr.level;
     newUser->score = curr.score;
-    strcpy(newUser->userName,"test"); //这里的test在后期需要被修改成一个获取用户输入的用户名的函数
+    strcpy(newUser->userName,username); //这里的test在后期需要被修改成一个获取用户输入的用户名的函数
     newUser->next = move->next;
     move->next = newUser;
-    removeLast(move);
 }
 //写入排行榜玩家数据结构，文件默认存储5个玩家的数据
 void saveRank(){
@@ -117,16 +95,6 @@ void saveRank(){
 }
 
 void loadRank(){
-    //释放之前的指针空间
-    char *temp = malloc(sizeof(11));
-    while(userHead){
-        List temp = userHead->next;
-        free(userHead);
-        userHead = temp;
-        if(temp != NULL){
-            temp = temp->next;
-        }
-    }
     userHead = userTail = (List)malloc(sizeof(struct userRank));
     FILE* fp;
     if((fp = fopen("Rank.user","rb")) == NULL){

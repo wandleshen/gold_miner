@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <windows.h>
-
+#include "genlib.h"
 //默认最多存储五个玩家的数据
 #define MAX_USER_SAVED 5
 

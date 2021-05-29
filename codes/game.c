@@ -265,11 +265,7 @@ void gameTimer(int timerID){
 			isGame = 0;
 			isInit = 1;
 			MovePen(0, 0);
-			drawIniPage(); 
-			disableButton(2);
-			disableButton(3);
-			//输入用户名输入成绩  #TODO
-			
+			reDrawIniPage(); 	
 			cancelTimer(LOSE);
 			break;
 		case SCORE:
@@ -293,10 +289,20 @@ void anime(){
 		mbflag = 1;
 		if(currentStatus.score >= target)
 			startTimer(WIN, 500);
-		else
-			startTimer(LOSE, 500);
-		return;
-	}
+		else{
+			InitConsole();
+			MessageBox(NULL,"请在终端中输入您的用户名","等待输入",0);
+			fflush(stdin);
+			username = GetLine();
+			isGameOver = 1;
+			saveRank();
+			
+			printf("感谢您的游玩！%s\n",username);
+			printf("游戏数据保存成功！"); 
+			
+			//FreeConsole();
+			startTimer(LOSE,500);
+		}
 
 	switch(condition){
 		case WAIT:  //钩子愉快环绕

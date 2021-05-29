@@ -30,12 +30,12 @@ typedef enum{
 	stoneValue,
 	hookSize
 };
-
+extern string username;
 extern User currentStatus;
 extern int isGame;
 extern int isStore;
 extern int isInit;
-extern int speedKey;  //from menu.h  超级速度开关
+extern int speedKey;  //from menu.h  超级速度开�?
 void initGame();
 void gameKeyboardEvent(int key, int event);
 void gameTimer(int timerID);

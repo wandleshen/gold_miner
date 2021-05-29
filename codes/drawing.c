@@ -159,7 +159,6 @@ void drawIniPage(){
 		buttonArray[i].x = buttonXPos;
 		buttonArray[i].y = buttonYPos[i];
 		strcpy(buttonArray[i].text, text[i]);
-		printf("%lf %lf %s\n",buttonArray[i].x,buttonArray[i].y,buttonArray[i].text);
 		buttonArray[i].isDisabled = FALSE;
 	}
     block *tempBlock = (block*)malloc(sizeof(block));
@@ -450,7 +449,6 @@ void showRank(){
 	DrawTextString("Rank");
 	MovePen(wWidth/2-2,wHeight/2+2-2*fontHeight);
 	DrawTextString(" username               level                 score ");
-	
 	
 	loadRank();
 	List move = userHead->next;
