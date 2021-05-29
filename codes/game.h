@@ -36,7 +36,7 @@ extern int isGame;
 extern int isStore;
 extern int isInit;
 extern int isInput;
-extern int speedKey;  //from menu.h  瓒呯骇閫熷害寮�鍏?
+extern int speedKey;  //from menu.h  钩子下落的速度
 extern textPointer ptr;
 void initGame();
 void gameKeyboardEvent(int key, int event);

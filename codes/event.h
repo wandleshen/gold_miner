@@ -9,7 +9,7 @@
 #include "game.h"
 #include "drawing.h"
 
-void MouseEventProcess(int x, int y, int button, int event);  //ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½eventï¿½ï¿½ï¿½ 
+void MouseEventProcess(int x, int y, int button, int event);  //Êó±êÐÅÏ¢»Øµ÷º¯Êý
 void KeyboardEventProcess(int key, int event);
 void TimerEventProcess(int timerID);
 void CharEventProcess(char c);
