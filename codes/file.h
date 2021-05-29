@@ -24,11 +24,18 @@ typedef struct userRank{
     char userName[10]; //用户名最多9位
     struct userRank* next;
 } *List;
+
+typedef struct Text{
+	double x;
+	double y;
+	string data;
+	int curpos;
+}*textPointer;
 //当前玩家游戏状态
 extern User currentStatus;
 //判定游戏是否结束
-extern int isGameOver;
-
+extern int isGame;
+textPointer ptr;
 
 void saveGame();//将当前游戏状态存储到saveGame.txt中
 void loadGame();//从saveGame.txt中读取当前游戏状态

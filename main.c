@@ -8,6 +8,7 @@ int isGameOver = 0;
 User currentStatus;
 
 void Main(){
+	InitConsole();
 	FILE* fp;
 	fp = fopen("Game.save","wb");
 	int a = 100;
@@ -29,5 +30,6 @@ void Main(){
 	registerKeyboardEvent(KeyboardEventProcess);
 	registerMouseEvent(MouseEventProcess);
 	registerTimerEvent(TimerEventProcess);
+	registerCharEvent(CharEventProcess);
 }
 #endif

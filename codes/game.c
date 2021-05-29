@@ -7,6 +7,7 @@
 #define WIN 2
 #define LOSE 3
 #define SCORE 4
+#define INPUT 5
 #define refreshRate 10
 #define realX wWidth / 2 - 8 * length + currentLength * cos(angle)
 #define realY wHeight - 1.4 + 2 * length - currentLength * sin(angle)
@@ -35,7 +36,7 @@ void initGame(){  //初始化新一局游戏
 	link = initBlocks();
 	condition = WAIT;
 	target = 100 * (currentStatus.level + 1) * (currentStatus.level + 2);
-	countdown = 60000;
+	countdown = 4000;
 	dTheta = 0;
 	drawMainGame();
 	startTimer(TIMER, refreshRate);
@@ -263,14 +264,34 @@ void gameTimer(int timerID){
 			break;
 		case LOSE:
 			isGame = 0;
-			isInit = 1;
+			isInput = 1;
 			MovePen(0, 0);
 			reDrawIniPage(); 	
 			cancelTimer(LOSE);
+			ptr = malloc(sizeof(struct Text));
+			ptr->x = GetWindowWidth()/2-2;
+			ptr->y = GetWindowHeight()/2;
+			ptr->curpos = 0;
+			ptr->data = malloc(sizeof(10));
+			memset(ptr->data,0,10);
+			disableAllButton();
+			clearScreen();
+			startTimer(INPUT,100);
 			break;
 		case SCORE:
 			drawScore();
 			break;
+		case INPUT:{
+			drawInputBox();
+			MovePen(ptr->x,ptr->y);
+			SetPenColor("white");
+			drawRec(4,0.4);
+			SetPenColor("red");
+			DrawCurSor(ptr->data,ptr->curpos,ptr->x,ptr->y);
+			SetPenColor("black");
+			drawText();
+			break;
+		}
 	}
 }
 
@@ -290,18 +311,11 @@ void anime(){
 		if(currentStatus.score >= target)
 			startTimer(WIN, 500);
 		else{
-			InitConsole();
-			MessageBox(NULL,"请在终端中输入您的用户名","等待输入",0);
-			fflush(stdin);
-			username = GetLine();
-			isGameOver = 1;
-			saveRank();
-			
-			printf("感谢您的游玩！%s\n",username);
-			printf("游戏数据保存成功！"); 
-			
-			//FreeConsole();
+			//clearScreen();
 			startTimer(LOSE,500);
+			//GetLine();
+			//FreeConsole();
+			//startTimer(WIN,500);
 		}
 	}
 	switch(condition){

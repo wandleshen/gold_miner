@@ -69,7 +69,7 @@ void insertUser(User curr){
 void saveRank(){
     FILE *fp;
     //如果游戏没有结束，直接返回
-    if(isGameOver == 0){
+    if(isGame != 0){
         return;
     }
     insertUser(currentStatus);

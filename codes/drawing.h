@@ -35,7 +35,7 @@ typedef struct button{ //开始界面按钮结构
     char text[20];
     int isDisabled;
 } Button;
-
+extern textPointer ptr;
 extern User currentStatus;
 extern int isRanking;
 extern List userHead;
@@ -51,5 +51,6 @@ void eraseBlock(block);  //擦除方块
 void drawIniPage();  //绘出开始界面 
 void drawStore();  //绘出商店
 void showRank(); //输出排行榜
- 
+void drawInputBox();
+void DrawCurSor();
 #endif

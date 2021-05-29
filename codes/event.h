@@ -7,9 +7,10 @@
 #include "store.h"
 #include "initPage.h"
 #include "game.h"
+#include "drawing.h"
 
 void MouseEventProcess(int x, int y, int button, int event);  //���ڷ������event��� 
 void KeyboardEventProcess(int key, int event);
 void TimerEventProcess(int timerID);
-
+void CharEventProcess(char c);
 #endif

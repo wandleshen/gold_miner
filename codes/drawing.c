@@ -5,7 +5,7 @@
 #define indent 0.15
 #define wWidth GetWindowWidth()
 #define wHeight GetWindowHeight()
-
+#define CURSOR "_"
 void drawHaiMian(double width, double height, double mostLeft,double mostLow, double myPixel);
 void drawEye(double x, double y,double myPixel);
 void drawHand(double x, double y, double myPixel);
@@ -501,3 +501,27 @@ void clearScreen(){
 	drawRec(wWidth,wHeight);
 	SetPenColor(color);
 }
+void drawInputBox(){
+	MovePen(0,0);
+	SetPenColor("Beige");
+	drawRec(wWidth,wHeight); 
+	SetPenColor("black");
+	MovePen(GetWindowWidth()/2-1.7,GetWindowHeight()/2+1);
+	DrawTextString("游戏结束！请输入您的大名（最多八位）");
+	SetPenColor("brown");
+	MovePen(GetWindowWidth()/2-3,GetWindowHeight()/2-1);
+	
+	drawRec(6,2);
+}
+void drawText(){
+	printf("\ntextx:%lf\n",ptr->x);
+	MovePen(ptr->x,ptr->y);
+	DrawTextString(ptr->data);
+}
+void DrawCurSor(string str, int curPos, double startx, double starty){
+	if (curPos < 0 || curPos > strlen(str)) return;
+	printf("\n%lf\n",startx+TextStringWidth(SubString(str, 0, curPos-1)));
+	MovePen(startx+TextStringWidth(SubString(str, 0, curPos-1)), starty);
+	DrawTextString(CURSOR);
+}
+

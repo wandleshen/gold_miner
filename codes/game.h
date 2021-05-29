@@ -35,7 +35,9 @@ extern User currentStatus;
 extern int isGame;
 extern int isStore;
 extern int isInit;
+extern int isInput;
 extern int speedKey;  //from menu.h  超级速度开�?
+extern textPointer ptr;
 void initGame();
 void gameKeyboardEvent(int key, int event);
 void gameTimer(int timerID);
