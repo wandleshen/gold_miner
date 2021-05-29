@@ -181,4 +181,12 @@ void cancelCharEvent();
 void cancelMouseEvent();
 void cancelTimerEvent();
 
+/*
+ * Functions: DrawPic
+ * Usage: DrawPic(char* path);
+ * ------------------------------------------------
+ * This function is used to insert *.bpm pictures. Made by wandleshen
+ */
+void DrawPic(char* path);
+
 #endif

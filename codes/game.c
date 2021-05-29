@@ -21,6 +21,7 @@ static int dScore, dMoney;  //改变的加分和金钱
 double dTheta;
  
 void drawMiner();  //绘出矿机 
+void drawBackground();  //绘出背景
 linkBlock* initBlocks();  //生成矿物（双向链表，头链表(head)不储存数据） 
 
 linkBlock* link;  //矿物链
@@ -35,7 +36,7 @@ void initGame(){  //初始化新一局游戏
 	link = initBlocks();
 	condition = WAIT;
 	target = 100 * (currentStatus.level + 1) * (currentStatus.level + 2);
-	countdown = 6000;
+	countdown = 60000;
 	dTheta = 0;
 	drawMainGame();
 	startTimer(TIMER, refreshRate);
@@ -64,9 +65,7 @@ void drawHook(){  //画钩子
 
 void drawMainGame(){  //绘出主要内容 
 	linkBlock* head;
-	SetPenColor("Beige");
-	MovePen(0, 0);
-	drawRec(wWidth, wHeight - 0.31);
+	drawBackground();
 	drawHaiMian(wWidth, wHeight, 0.45 * wWidth, 0.8 * wHeight, 0.0025 * wWidth);
 	SetPenColor("Black");
 	MovePen(0, wHeight - 1.4);
@@ -79,6 +78,16 @@ void drawMainGame(){  //绘出主要内容
 	}
 	drawTarget();
 	drawHook();
+}
+
+void drawBackground(){  //绘出背景
+	DrawPic("./media_src/image/bg.bmp");
+	SetPenColor("Beige");
+	MovePen(0, wHeight);
+	drawRec(wWidth, -1.4);
+	MovePen(0, wHeight - 1.4);
+	SetPenColor("lightBg");
+	drawRec(wWidth, -0.6);
 }
 
 void drawMiner(){  //绘出矿机 
@@ -290,10 +299,16 @@ void anime(){
 
 	switch(condition){
 		case WAIT:  //钩子愉快环绕
+			SetEraseMode(1);
+			drawHook();
+			SetEraseMode(0);
 			dTheta += 0.001 * cos(angle);
         	angle += dTheta;
 			break;
 		case DOWN:  //钩子下降
+			SetEraseMode(1);
+			drawHook();
+			SetEraseMode(0);
 			currentLength += speed;
 			thisRock = getRock();
 			if (thisRock){  //抓到矿石
@@ -319,8 +334,12 @@ void anime(){
         	}
 			break;
 		case UP:  //钩子上升
+			SetEraseMode(1);
+			drawHook();
+			SetEraseMode(0);
 			currentLength -= thisSpeed;
 			if (thisRock){  //抓到矿石
+				eraseBlock(thisRock->element);
 				thisRock->element.x += thisSpeed * cos(PI - angle);
 				thisRock->element.y += thisSpeed * sin(PI - angle);
 			}

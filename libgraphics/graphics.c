@@ -2003,3 +2003,16 @@ double ScaleYInches(int y)/*y coordinate from pixels to inches*/
 {
  	  return GetWindowHeight()-(double)y/GetYResolution();
 } 	   
+
+/*
+ * Functions: DrawPic
+ * Usage: DrawPic(char* path);
+ * ------------------------------------------------
+ * This function is used to insert *.bpm pictures. Made by wandleshen
+ */
+void DrawPic(char* path){
+    HBITMAP bg;
+
+    bg = (HBITMAP)LoadImage(NULL, path, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE|LR_CREATEDIBSECTION);
+    SelectObject(osdc, bg);
+}
