@@ -30,31 +30,31 @@ void movePenRelative(double dx, double dy){  //“∆∂Øœ‡∂‘æ‡¿Î
 }
 
 void defineColor(){
-	DefineColor("edgeStone", 112 / 256.0, 112 / 256.0, 112 / 256.0);
-	DefineColor("darkStone", 117 / 256.0, 117 / 256.0, 117 / 256.0);
-	DefineColor("middleStone", 128 / 256.0, 128 / 256.0, 128 / 256.0);
-	DefineColor("lightStone", 133 / 256.0, 133 / 256.0, 133 / 256.0);
-	DefineColor("dimStone", 144 / 256.0, 144 / 256.0, 144 / 256.0);
-	DefineColor("edgeGold", 144 / 256.0, 130 / 256.0, 25 / 256.0);
-	DefineColor("darkGold", 237 / 256.0, 220 / 256.0, 50 / 256.0);
-	DefineColor("middleGold", 253 / 256.0, 241 / 256.0, 92 / 256.0);
-	DefineColor("lightGold", 253 / 256.0, 244 / 256.0, 121 / 256.0);
-	DefineColor("dimGold", 254 / 256.0, 250 / 256.0, 180 / 256.0);
-	DefineColor("Diamond", 61 / 256.0, 89 / 256.0, 171 / 256.0);
-	DefineColor("shadow",108 / 256.0, 97 / 256.0, 97 / 256.0);
-	DefineColor("shadowBrown", 102 / 256.0, 51 / 256.0, 0 / 256.0);
-	DefineColor("background", 204 / 256.0, 255 / 256.0, 255 / 256.0);
-	DefineColor("eye", 0 / 256.0, 51 / 256.0, 51 / 256.0);
-	DefineColor("shadowRed", 153 / 256.0, 0, 0);
-	DefineColor("tongue", 255 / 256.0, 102 / 256.0, 102 / 256.0);
-	DefineColor("tie", 255 / 256.0, 51 / 256.0, 51 / 256.0);
-	DefineColor("pants", 204 / 256.0, 102 / 256.0, 0 / 256.0);
-	DefineColor("shadowYellow", 204 / 256.0, 204 / 256.0, 0 / 256.0);
-	DefineColor("Beige", 245 / 256.0, 245 / 256.0, 220 / 256.0);
-	DefineColor("shadowBlue", 0 / 256.0, 204 / 256.0, 204 / 256.0);
-	DefineColor("lightMiner", 144 / 256.0, 79 / 256.0, 14 / 256.0);
-	DefineColor("darkMiner", 78 / 256.0, 42 / 256.0, 2 / 256.0);
-	DefineColor("greyMiner", 128 / 256.0, 128 / 256.0, 128 / 256.0);
+	DefineColor("edgeStone", 112 / 255.0, 112 / 255.0, 112 / 255.0);
+	DefineColor("darkStone", 117 / 255.0, 117 / 255.0, 117 / 255.0);
+	DefineColor("middleStone", 128 / 255.0, 128 / 255.0, 128 / 255.0);
+	DefineColor("lightStone", 133 / 255.0, 133 / 255.0, 133 / 255.0);
+	DefineColor("dimStone", 144 / 255.0, 144 / 255.0, 144 / 255.0);
+	DefineColor("edgeGold", 144 / 255.0, 130 / 255.0, 25 / 255.0);
+	DefineColor("darkGold", 237 / 255.0, 220 / 255.0, 50 / 255.0);
+	DefineColor("middleGold", 253 / 255.0, 241 / 255.0, 92 / 255.0);
+	DefineColor("lightGold", 253 / 255.0, 244 / 255.0, 121 / 255.0);
+	DefineColor("dimGold", 254 / 255.0, 250 / 255.0, 180 / 255.0);
+	DefineColor("Diamond", 61 / 255.0, 89 / 255.0, 171 / 255.0);
+	DefineColor("shadow",108 / 255.0, 97 / 255.0, 97 / 255.0);
+	DefineColor("shadowBrown", 102 / 255.0, 51 / 255.0, 0 / 255.0);
+	DefineColor("background", 204 / 255.0, 255 / 255.0, 255 / 255.0);
+	DefineColor("eye", 0 / 255.0, 51 / 255.0, 51 / 255.0);
+	DefineColor("shadowRed", 153 / 255.0, 0, 0);
+	DefineColor("tongue", 255 / 255.0, 102 / 255.0, 102 / 255.0);
+	DefineColor("tie", 255 / 255.0, 51 / 255.0, 51 / 255.0);
+	DefineColor("pants", 204 / 255.0, 102 / 255.0, 0 / 255.0);
+	DefineColor("shadowYellow", 204 / 255.0, 204 / 255.0, 0 / 255.0);
+	DefineColor("Beige", 245 / 255.0, 245 / 255.0, 220 / 255.0);
+	DefineColor("shadowBlue", 0 / 255.0, 204 / 255.0, 204 / 255.0);
+	DefineColor("lightMiner", 144 / 255.0, 79 / 255.0, 14 / 255.0);
+	DefineColor("darkMiner", 78 / 255.0, 42 / 255.0, 2 / 255.0);
+	DefineColor("greyMiner", 128 / 255.0, 128 / 255.0, 128 / 255.0);
 }
 
 

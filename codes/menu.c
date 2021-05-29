@@ -194,7 +194,7 @@ void menuMouseEvent(int x, int y, int button, int event){
 			
 			else if (isShow[1]){  //有关修改器菜单的内容
 				if (mouseX >= W && mouseX <= 2 * W){
-					if (mouseY >= GetWindowHeight() - 2 * H){  //究极速度  #TODO
+					if (mouseY >= GetWindowHeight() - 2 * H){  //究极速度
 						speedKey = 1 - speedKey;
 					}
 					else if (mouseY >= GetWindowHeight() - 3 * H){  //更多时间
@@ -226,7 +226,7 @@ void menuMouseEvent(int x, int y, int button, int event){
 						if (isGame)
 							isPaused = 1 - isPaused;
 					}
-					else if (mouseY >= GetWindowHeight() - 4 * H){  //静音  #TODO
+					else if (mouseY >= GetWindowHeight() - 4 * H){  //静音
 						if(isMusicPlaying) stopBGM();
 						else welcomeMusic();
 						isMusicPlaying = !isMusicPlaying; 

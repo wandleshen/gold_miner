@@ -6,8 +6,10 @@
 *.exe
 *.win
 *.gch
+Makefile
 
 #Others
 .vscode/
+.history/
 *.jpg
 *.png

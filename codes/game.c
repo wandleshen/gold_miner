@@ -326,7 +326,7 @@ void anime(){
 			}
 			if (fabs(currentLength - initLength) <= 0.01){
 				condition = WAIT;
-				if(thisRock){  //得分 音效 #TODO
+				if(thisRock){  //得分
 					if(thisRock->element.type == GOLD){
 						goldMusic();
 						dScore = 200 * (1 + thisRock->element.size + currentStatus.grades[moreScore]);
