@@ -1072,9 +1072,9 @@ static LONG FAR PASCAL GraphicsEventProc(HWND hwnd, UINT msg,
 {
     switch(msg)
     {
-		// 刘新国：使用了double buffer, 手动清屏，
-		//         无需系统擦除背景，避免闪烁
-		//         感谢18级石蒙同学，提供这个方法解决刷新闪烁问题
+		// 锟斤拷锟铰癸拷锟斤拷使锟斤拷锟斤拷double buffer, 锟街讹拷锟斤拷锟斤拷锟斤拷
+		//         锟斤拷锟斤拷系统锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷烁
+		//         锟斤拷谢18锟斤拷石锟斤拷同学锟斤拷锟结供锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷刷锟斤拷锟斤拷烁锟斤拷锟斤拷
 		case WM_ERASEBKGND: 
 			return 0; 
 
@@ -2015,4 +2015,5 @@ void DrawPic(char* path){
 
     bg = (HBITMAP)LoadImage(NULL, path, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE|LR_CREATEDIBSECTION);
     SelectObject(osdc, bg);
+    DeleteObject(bg);
 }

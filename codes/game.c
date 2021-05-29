@@ -23,7 +23,6 @@ double dTheta;
 void drawMiner();  //绘出矿机 
 void drawBackground();  //绘出背景
 linkBlock* initBlocks();  //生成矿物（双向链表，头链表(head)不储存数据） 
-
 linkBlock* link;  //矿物链
 linkBlock* thisRock;  //特定矿物
 
@@ -65,6 +64,7 @@ void drawHook(){  //画钩子
 
 void drawMainGame(){  //绘出主要内容 
 	linkBlock* head;
+	DisplayClear();
 	drawBackground();
 	drawHaiMian(wWidth, wHeight, 0.45 * wWidth, 0.8 * wHeight, 0.0025 * wWidth);
 	SetPenColor("Black");
