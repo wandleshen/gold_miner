@@ -2,6 +2,7 @@
 
 List userHead = NULL;
 List userTail = NULL;
+string username;
 
 
 

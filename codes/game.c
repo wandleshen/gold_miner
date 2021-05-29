@@ -303,7 +303,7 @@ void anime(){
 			//FreeConsole();
 			startTimer(LOSE,500);
 		}
-
+	}
 	switch(condition){
 		case WAIT:  //¹³×ÓÓä¿ì»·ÈÆ
 			SetEraseMode(1);

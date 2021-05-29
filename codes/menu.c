@@ -273,6 +273,9 @@ void menuKeyboardEvent(int key, int event){
 					pauseGame();
 					break;
 				case 'M': case 'm':  //Mute
+					if(isMusicPlaying) stopBGM();
+					else welcomeMusic();
+					isMusicPlaying = !isMusicPlaying; 
 					break;
 				case 'E': case 'e':  //Exit
 					showBox(0);
