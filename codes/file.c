@@ -61,7 +61,7 @@ void insertUser(User curr){
     List newUser = (List)malloc(sizeof(struct userRank));
     newUser->level = curr.level;
     newUser->score = curr.score;
-    strcpy(newUser->userName,username); //这里的test在后期需要被修改成一个获取用户输入的用户名的函数
+    strcpy(newUser->userName,username); 
     newUser->next = move->next;
     move->next = newUser;
 }
@@ -73,7 +73,7 @@ void saveRank(){
         return;
     }
     insertUser(currentStatus);
-    //需要从外部获取输入的用户名，当前指定为test
+    
     if((fp = fopen("Rank.user","wb")) == NULL){
         MessageBox(NULL,"无法新建排行榜文件","错误",0);
         return;

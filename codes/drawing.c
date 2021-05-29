@@ -440,25 +440,30 @@ void showRank(){
 
 	double fontSize = TextStringWidth("1");
 	double fontHeight = GetFontHeight();
-	SetPenColor("edgeGold");
+	SetPenColor("dimGold");
 	
 	MovePen(wWidth/2-2,wHeight/2+2);
 	drawRec(4,-4);
-	SetPenColor("red");
+	SetPenColor("black");
 	MovePen(wWidth/2-2*fontSize,wHeight/2+2-fontHeight);
 	DrawTextString("Rank");
 	MovePen(wWidth/2-2,wHeight/2+2-2*fontHeight);
-	DrawTextString(" username               level                 score ");
-	
+	DrawTextString(" username");
+	MovePen(wWidth/2-2*fontSize,wHeight/2+2-2*fontHeight);
+	DrawTextString("level");
+	MovePen(wWidth/2+1,wHeight/2+2-2*fontHeight);
+	DrawTextString("score ");
 	loadRank();
 	List move = userHead->next;
 	int count = 0;
 	while(move != NULL){
 		//以下不直接使用一个sprintf再Draw并且Draw了一堆空格而不是使用%xd的原因是本地测试这样做会导致只能显示两个用户的数据（不知道为什么），同时调整第二个%d的输出位数的话会导致第三个数据（score）无法显示，可以测试一下 
 		MovePen(wWidth/2-2,wHeight/2+2-(2*count+4)*fontHeight);
-		sprintf(buffer," %-27s %d ",move->userName,move->level);  
+		DrawTextString(move->userName);
+		MovePen(wWidth/2-2*fontSize,wHeight/2+2-(2*count+4)*fontHeight);
+		sprintf(buffer,"%d",move->level);
 		DrawTextString(buffer);
-		DrawTextString("                       ");
+		MovePen(wWidth/2+1,wHeight/2+2-(2*count+4)*fontHeight);
 		sprintf(buffer,"%d ",move->score);
 		DrawTextString(buffer);
 		count++;

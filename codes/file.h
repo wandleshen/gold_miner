@@ -40,6 +40,6 @@ textPointer ptr;
 void saveGame();//将当前游戏状态存储到saveGame.txt中
 void loadGame();//从saveGame.txt中读取当前游戏状态
 void saveRank();//建立存档，文件默认存储5个玩家的数据
-void loadRank();//将文件中的数据保存到userRank.txt中（注意此文件初始有五个0值），请勿删除
+void loadRank();//将文件中的数据保存到userRank.txt中
 
 #endif
