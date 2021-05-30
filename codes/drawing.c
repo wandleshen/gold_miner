@@ -513,7 +513,7 @@ void drawInputBox(){
 	drawRec(wWidth,wHeight); 
 	SetPenColor("shadowBlue");
 	MovePen(GetWindowWidth()/2-2,GetWindowHeight()/2+1.5);
-	DrawTextString("???·?á???????????ú???ó???¨×??à°?????");
+	DrawTextString("游戏结束！请输入您的大名（最多八位）");
 	SetPenColor("grey");
 	MovePen(GetWindowWidth()/2-3,GetWindowHeight()/2-1);
 	
