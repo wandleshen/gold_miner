@@ -45,16 +45,7 @@ int isGameOver = 0;
 User currentStatus;
 
 void Main(){
-	FILE* fp;
-	fp = fopen("Game.save","wb");
-	int a = 100;
-	for(int i = 0;i<2;i++)
-	fwrite(&a,4,1,fp);
-	a = 0;
-	for(int i = 0;i<5;i++){
-		fwrite(&a,4,1,fp);
-	}
-	fclose(fp);
+	initFile();
 	InitGraphics();
 	defineColor();
 	currentStatus.level = 1;

@@ -4,7 +4,18 @@ List userHead = NULL;
 List userTail = NULL;
 string username;
 
-
+void initFile(){
+    FILE* fp;
+	fp = fopen("Game.save","wb");
+	int a = 100;
+	for(int i = 0;i<2;i++)
+	fwrite(&a,4,1,fp);
+	a = 0;
+	for(int i = 0;i<5;i++){
+		fwrite(&a,4,1,fp);
+	}
+	fclose(fp);
+}
 
 //将当前游戏状态存储到saveGame.txt中
 void saveGame(){
