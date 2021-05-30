@@ -46,6 +46,7 @@ void drawTarget(){
 	char s[50];
     sprintf(s, "当前金钱:%d 当前分数:%d 目标分数:%d 剩余时间:%ds", currentStatus.money, currentStatus.score, target, countdown / 1000);
 
+	SetPenColor("black");
     MovePen(0.1, wHeight * 5 / 6);
     DrawTextString(s);
 }
