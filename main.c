@@ -48,11 +48,7 @@ void Main(){
 	initFile();
 	InitGraphics();
 	defineColor();
-	currentStatus.level = 1;
-	currentStatus.money = 0;
-	currentStatus.score = 0;
-	for(int i = 0; i<4; i++) currentStatus.grades[i] = 0;
-	drawIniPage();
+  drawIniPage();
 	registerKeyboardEvent(KeyboardEventProcess);
 	registerMouseEvent(MouseEventProcess);
 	registerTimerEvent(TimerEventProcess);

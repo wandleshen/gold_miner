@@ -71,11 +71,15 @@ void menuMouseEvent(int x, int y, int button, int event){
 						loadGame();
 						isStore = 1;
 						isGame = 0;
+						isInit = 0;
 						drawStore();
 					}
 					if (i == 0){
 						MovePen(0, 0);
 						drawIniPage();
+						isInit = 1;
+						isStore = 0;
+						isGame = 0;
 					}
 				}
 				else{
@@ -84,7 +88,7 @@ void menuMouseEvent(int x, int y, int button, int event){
 					if (isGame && !isPaused)
 						pauseGame();  //¼ÌÐøÓÎÏ·
 					if (isGame && isPaused)
-							drawMainGame();
+						drawMainGame();
 						
 				}
 				i = -1;

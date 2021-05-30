@@ -7,6 +7,7 @@
 #include "drawing.h"
 extern int isGame;
 extern int isInit;
+extern int isStore;
 extern Button buttonArray[];
 
 void initPageEvent(int x, int y, int button, int event);  //初始界面相关键盘回调函数

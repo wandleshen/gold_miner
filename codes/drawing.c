@@ -323,7 +323,7 @@ void drawHalfDimmRec(double x, double y, string color1, string color2, int heigh
 }
 
 void drawStore(){
-	char s[2];
+	char s[25];
 	string power[4] = {
 		"力量增强",
 		"得分提升",

@@ -58,17 +58,23 @@ void initPageEvent(int x, int y, int button, int event){
 							break;
 						case 3:
 							//继续游戏
-							isGame = 1;
+							isStore = 1;
+							isGame = 0;
 							isInit = 0;
 							loadGame();
 							drawMenu();
-							initGame();
+							drawStore();
 						case 4:
 							//开始游戏
+							currentStatus.level = 1;
+							currentStatus.money = 0;
+							currentStatus.score = 0;
+							for(int i = 0; i<4; i++) currentStatus.grades[i] = 0;
 							initGame();
 							stopBGM();
 							isGame = 1;
 							isInit = 0;
+							isStore = 0;
 							drawMenu();
 							welcomeMusic();
 						default:
