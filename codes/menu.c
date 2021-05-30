@@ -348,7 +348,7 @@ void drawGame(){  //绘出游戏菜单
 
 void drawTrainer(){  //绘出修改器菜单 
 	string text[3] = {
-		"Higher Speed",
+		"Ultra Speed",
 		"More Time",
 		"Infinity Money"
 	};
