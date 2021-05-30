@@ -177,7 +177,7 @@ void menuMouseEvent(int x, int y, int button, int event){
 			else if (isShow[2]){  //有关帮助菜单的内容
 				if (mouseX >= 2 * W){
 					if (mouseY >= GetWindowHeight() - 2 * H)
-						system("notepad _help");
+						system("help.pdf");
 					else if(mouseY >= GetWindowHeight() - 3 * H)
 						system("notepad _about.us");
 				}

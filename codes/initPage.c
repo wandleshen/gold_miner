@@ -21,7 +21,7 @@ void enableAllButton(){
 	}
 }
 void gameHelp(){
-	system("notepad _help");
+	system("help.pdf");
 }
 int isInBox(Button a, double mouseX, double mouseY){
 
@@ -51,7 +51,7 @@ void initPageEvent(int x, int y, int button, int event){
 							quitGame();
 							break; 
 						case 1://”Œœ∑∞Ô÷˙ 
-							gameHelp();
+							gameHelp();	
 							break;
 						case 2://¥Ú”°≈≈––∞Ò 
 							showRank();

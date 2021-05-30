@@ -304,7 +304,7 @@ void anime(){
 	thisSpeed = speed;
 	countdown -= refreshRate;
 
-	if(countdown <= 0){
+	if(countdown <= 0 || link->next == NULL){
 		stopBGM(); 
 		cancelTimer(TIMER);
 		mbflag = 1;
