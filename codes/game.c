@@ -286,9 +286,8 @@ void gameTimer(int timerID){
 			MovePen(ptr->x,ptr->y);
 			SetPenColor("white");
 			drawRec(4,0.4);
-			SetPenColor("red");
-			DrawCurSor(ptr->data,ptr->curpos,ptr->x,ptr->y);
 			SetPenColor("black");
+			DrawCurSor(ptr->data,ptr->curpos,ptr->x,ptr->y);
 			drawText();
 			break;
 		}

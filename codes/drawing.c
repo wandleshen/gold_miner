@@ -55,6 +55,7 @@ void defineColor(){
 	DefineColor("lightMiner", 144 / 255.0, 79 / 255.0, 14 / 255.0);
 	DefineColor("darkMiner", 78 / 255.0, 42 / 255.0, 2 / 255.0);
 	DefineColor("greyMiner", 128 / 255.0, 128 / 255.0, 128 / 255.0);
+	DefineColor("grey", 224 / 255.0, 224 / 255.0, 224 / 255.0);
 }
 
 
@@ -510,23 +511,23 @@ void drawInputBox(){
 	MovePen(0,0);
 	SetPenColor("Beige");
 	drawRec(wWidth,wHeight); 
-	SetPenColor("black");
-	MovePen(GetWindowWidth()/2-1.7,GetWindowHeight()/2+1);
-	DrawTextString("游戏结束！请输入您的大名（最多八位）");
-	SetPenColor("brown");
+	SetPenColor("shadowBlue");
+	MovePen(GetWindowWidth()/2-2,GetWindowHeight()/2+1.5);
+	DrawTextString("???·?á???????????ú???ó???¨×??à°?????");
+	SetPenColor("grey");
 	MovePen(GetWindowWidth()/2-3,GetWindowHeight()/2-1);
 	
 	drawRec(6,2);
 }
 void drawText(){
 	printf("\ntextx:%lf\n",ptr->x);
-	MovePen(ptr->x,ptr->y);
+	MovePen(ptr->x+0.1,ptr->y+0.1);
 	DrawTextString(ptr->data);
 }
 void DrawCurSor(string str, int curPos, double startx, double starty){
 	if (curPos < 0 || curPos > strlen(str)) return;
 	printf("\n%lf\n",startx+TextStringWidth(SubString(str, 0, curPos-1)));
-	MovePen(startx+TextStringWidth(SubString(str, 0, curPos-1)), starty);
+	MovePen(startx+TextStringWidth(SubString(str, 0, curPos-1))+0.1, starty+0.1);
 	DrawTextString(CURSOR);
 }
 
