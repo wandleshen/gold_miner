@@ -9,6 +9,6 @@ extern int isGame;
 extern int isInit;
 extern Button buttonArray[];
 
-void initPageEvent(int x, int y, int button, int event);
+void initPageEvent(int x, int y, int button, int event);  //初始界面相关键盘回调函数
 
 #endif

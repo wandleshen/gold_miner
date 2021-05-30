@@ -53,7 +53,3 @@ typedef struct{
     int grades[4];  //储存四项能力的等级（分别是拉取速度增加，积分增加，石头价值增加，钩子变大）
 } player;
 ```
-
-## TODO
-
-- file.c输入用户名登录排行榜的内容

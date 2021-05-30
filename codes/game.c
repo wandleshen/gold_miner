@@ -36,7 +36,7 @@ void initGame(){  //初始化新一局游戏
 	link = initBlocks();
 	condition = WAIT;
 	target = 100 * (currentStatus.level + 1) * (currentStatus.level + 2);
-	countdown = 4000;
+	countdown = 60000;
 	dTheta = 0;
 	drawMainGame();
 	startTimer(TIMER, refreshRate);
@@ -177,9 +177,9 @@ linkBlock* initBlocks(){  //生成矿物（双向链表，头链表(head)不储存数据）
 	block rock;
 	p->next = p->prev = NULL;
 	
-	numbers[SMALLGOLD] = RandomInteger(1, 4);
+	numbers[SMALLGOLD] = RandomInteger(1, 5);
 	numbers[MIDDLEGOLD] = RandomInteger(1, 2);
-	numbers[LARGEGOLD] = RandomInteger(0, 1);
+	numbers[LARGEGOLD] = 1;
 	numbers[SMALLSTONE] = RandomInteger(min(1 + currentStatus.level, 3), min(2 + currentStatus.level, 4));
 	numbers[MIDDLESTONE] = RandomInteger(min(2, 1 + currentStatus.level), min(2 + currentStatus.level, 4));
 	numbers[DDIAMOND] = RandomInteger(min(1, 1 + currentStatus.level), min(2 + currentStatus.level, 5));

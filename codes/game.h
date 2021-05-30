@@ -38,9 +38,9 @@ extern int isInit;
 extern int isInput;
 extern int speedKey;  //from menu.h  钩子下落的速度
 extern textPointer ptr;
-void initGame();
-void gameKeyboardEvent(int key, int event);
-void gameTimer(int timerID);
-void pauseGame();
+void initGame();  //初始化游戏界面
+void gameKeyboardEvent(int key, int event);  //游戏内相关键盘回调函数
+void gameTimer(int timerID);  //游戏内相关时钟回调函数
+void pauseGame();  //暂停游戏
 
 #endif

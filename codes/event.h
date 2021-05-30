@@ -10,7 +10,7 @@
 #include "drawing.h"
 
 void MouseEventProcess(int x, int y, int button, int event);  //鼠标信息回调函数
-void KeyboardEventProcess(int key, int event);
-void TimerEventProcess(int timerID);
-void CharEventProcess(char c);
+void KeyboardEventProcess(int key, int event);  //键盘信息回调函数
+void TimerEventProcess(int timerID);  //时钟信息回调函数
+void CharEventProcess(char c);  //字符信息回调函数
 #endif
