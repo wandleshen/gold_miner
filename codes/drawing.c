@@ -6,12 +6,7 @@
 #define wWidth GetWindowWidth()
 #define wHeight GetWindowHeight()
 #define CURSOR "_"
-void drawHaiMian(double width, double height, double mostLeft,double mostLow, double myPixel);
-void drawEye(double x, double y,double myPixel);
-void drawHand(double x, double y, double myPixel);
-void drawPartLow(double x, double y, double myPixel);
-void drawPartLow(double x, double y, double myPixel);
-void drawHalfDimmRec(double x, double y, string color1, string color2, int height, double myPixel);
+
 
 
 void drawRec(double dx, double dy){  //»­¾ØÐÎ

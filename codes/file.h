@@ -37,6 +37,7 @@ extern User currentStatus;
 extern int isGame;
 textPointer ptr;
 
+void initFile();//初始化文件 
 void saveGame();//将当前游戏状态存储到saveGame.txt中
 void loadGame();//从saveGame.txt中读取当前游戏状态
 void saveRank();//建立存档，文件默认存储5个玩家的数据

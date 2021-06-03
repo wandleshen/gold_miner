@@ -7,8 +7,10 @@
 #include "extgraph.h"
 #include "random.h"
 #include <stdlib.h>
-
-typedef enum{
+#include "graphics.h"
+#include "drawing.h"
+#include "initPage.h"
+enum{
 	SMALLGOLD,
 	MIDDLEGOLD,
 	LARGEGOLD,
@@ -17,14 +19,14 @@ typedef enum{
 	DDIAMOND
 };
 
-typedef enum{
+enum{
 	WAIT,
 	UP,
 	DOWN,
 	PAUSE
 };
 
-typedef enum{
+enum{
 	hookSpeed,
 	moreScore,
 	stoneValue,

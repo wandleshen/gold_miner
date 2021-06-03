@@ -6,6 +6,7 @@
 #include "graphics.h"
 #include "extgraph.h"
 #include "file.h"
+#include "game.h"
 
 extern int isMenu;  //from event.h 表示正在进行菜单相关操作 
 extern int isStore;  //from event.h  表示正在商店界面 
