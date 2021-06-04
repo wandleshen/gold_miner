@@ -1,6 +1,6 @@
 #pragma once
-#ifndef FILECODE
-#define FILECODE
+#ifndef _FILECODE
+#define _FILECODE
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -11,6 +11,7 @@
 
 //玩家存档数据结构
 typedef struct continueUserList{
+	int isDoublePlayer;
     int level;
     int score;
     int money;

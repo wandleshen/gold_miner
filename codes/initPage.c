@@ -25,9 +25,21 @@ void gameHelp(){
 }
 int isInBox(Button a, double mouseX, double mouseY){
 
-	return mouseX >= a.x &&mouseX <= a.x+1 && mouseY <= a.y +0.4 && mouseY >= a.y-0.4;
+	return mouseX >= a.x &&mouseX <= a.x+1 && mouseY <= a.y+1+0.4 && mouseY >= a.y+1-0.4;
 }
-
+void startGameFunc(){
+	currentStatus.level = 1;
+	currentStatus.money = 0;
+	currentStatus.score = 0;
+	for(int i = 0; i<4; i++) currentStatus.grades[i] = 0;
+	initGame();
+	stopBGM();
+	isGame = 1;
+	isInit = 0;
+	isStore = 0;
+	drawMenu();
+	welcomeMusic();
+}
 void initPageEvent(int x, int y, int button, int event){
 		double mouseX = ScaleXInches(x);
 		double mouseY = ScaleXInches(y);
@@ -42,10 +54,10 @@ void initPageEvent(int x, int y, int button, int event){
 						return;
 					}
 					int i;
-					for(i = 0;i < 5; i++){
+					for(i = 0;i < 6; i++){
 						if(isInBox(buttonArray[i],mouseX,mouseY) && buttonArray[i].isDisabled == FALSE) break;
 					} 
-					if(i == 5) return;
+					if(i == 6) return;
 					switch(i){
 						case 0: //退出游戏 
 							quitGame();
@@ -65,18 +77,13 @@ void initPageEvent(int x, int y, int button, int event){
 							drawMenu();
 							drawStore();
 						case 4:
+							currentStatus.isDoublePlayer = 1;
+							startGameFunc();
+							break; 
+						case 5:
 							//开始游戏
-							currentStatus.level = 1;
-							currentStatus.money = 0;
-							currentStatus.score = 0;
-							for(int i = 0; i<4; i++) currentStatus.grades[i] = 0;
-							initGame();
-							stopBGM();
-							isGame = 1;
-							isInit = 0;
-							isStore = 0;
-							drawMenu();
-							welcomeMusic();
+							currentStatus.isDoublePlayer = 0;
+							startGameFunc();
 						default:
 							break;
 				}

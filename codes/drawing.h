@@ -41,9 +41,9 @@ extern User currentStatus;
 extern int isRanking;
 extern List userHead;
 
-double buttonYPos[5];
+double buttonYPos[6];
 double buttonXPos;
-Button buttonArray[5];
+Button buttonArray[6];
 
 void drawRec(double, double);  //»­Ìî³ä¿ò 
 void defineColor();  //¶¨ÒåÑÕÉ« 

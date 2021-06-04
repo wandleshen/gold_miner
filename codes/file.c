@@ -9,11 +9,12 @@ void initFile(){
 	fp = fopen("Game.save","wb");
 	int a = 100;
 	for(int i = 0;i<2;i++)
-	fwrite(&a,4,1,fp);
+		fwrite(&a,4,1,fp);
 	a = 0;
 	for(int i = 0;i<5;i++){
 		fwrite(&a,4,1,fp);
 	}
+	fwrite(&a,4,0,fp);
 	fclose(fp);
 }
 
@@ -31,6 +32,7 @@ void saveGame(){
     for(int i = 0; i < 4; i++){
         fwrite(&currentStatus.grades[i],4,1,fp);
     }
+    fwrite(&currentStatus.isDoublePlayer,4,1,fp);
     fclose(fp);
 }
 
@@ -48,6 +50,7 @@ void loadGame(){
     for(int i = 0; i< 4 ;i++){
         fread(&currentStatus.grades[i],4,1,fp);
     }
+    fread(&currentStatus.isDoublePlayer,4,1,fp);
     //print();
     fclose(fp);
 }

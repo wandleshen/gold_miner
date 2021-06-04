@@ -145,13 +145,13 @@ void drawIniPage(){
 	//第一次进入的时候执行初始化 
 	if(flag == 0){
 		buttonXPos = (widthRatio+0.5+indent)*wWidth;
-		for(int i = 0;i<5;i++){
+		for(int i = 0;i<6;i++){
 			buttonYPos[i] = ((4-i+1.7)*heightRatio)*wHeight;
 		}
 		flag = 1;
 	}
-    string text[5] = {"开始游戏","继续游戏","排行榜","游戏帮助","退出游戏"};
-	for(int i = 0;i<5;i++){
+    string text[6] = {"开始游戏","双人游戏","继续游戏","排行榜","游戏帮助","退出游戏"};
+	for(int i = 0;i<6;i++){
 		buttonArray[i].x = buttonXPos;
 		buttonArray[i].y = buttonYPos[i];
 		strcpy(buttonArray[i].text, text[i]);
@@ -164,13 +164,13 @@ void drawIniPage(){
     tempBlock->y = (0.1+heightRatio*5)*wHeight;
     SetPenColor("Beige");
     drawRec(wWidth,wHeight);
-    for(int i = 0;i<5;i++){
+    for(int i = 0;i<6;i++){
         drawBlock(*tempBlock);
         SetPenColor("black");
         MovePen(buttonArray[i].x,buttonArray[i].y);
         tempBlock->y -= heightRatio*wHeight;
     }
-    for(int i = 0;i<5;i++){
+    for(int i = 0;i<6;i++){
     	MovePen(buttonArray[i].x,buttonArray[i].y);
     	DrawTextString(buttonArray[i].text);
 	}
@@ -315,7 +315,7 @@ void drawHalfDimmRec(double x, double y, string color1, string color2, int heigh
     SetPenColor(color2);
     MovePen(x+13*myPixel,y);
     drawRec(4*myPixel,height*myPixel);
-}
+} 
 
 void drawStore(){
 	char s[25];
