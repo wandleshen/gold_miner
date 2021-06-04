@@ -48,7 +48,8 @@ void Main(){
 	initFile();
 	InitGraphics();
 	defineColor();
-  drawIniPage();
+  	drawIniPage();
+  	SetWindowTitle("»Æ½ð¿ó¹¤");
 	registerKeyboardEvent(KeyboardEventProcess);
 	registerMouseEvent(MouseEventProcess);
 	registerTimerEvent(TimerEventProcess);
