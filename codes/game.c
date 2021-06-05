@@ -367,6 +367,10 @@ void anime(){
 			case DOWN:  //钩子下降
 				currentLength[i] += speed;
 				thisRock[i] = getRock(i);
+				for (int j = 0; j < 3; j++){
+					if (i != j && thisRock[i] && thisRock[i] == thisRock[j])
+						thisRock[i] = NULL;
+				}
 				if (thisRock[i]){  //抓到矿石
 					switch(thisRock[i]->element.type){
 						case GOLD:
@@ -416,7 +420,7 @@ void anime(){
 						thisRock[i]->prev->next = thisRock[i]->next;
 						if (thisRock[i]->next)
 							thisRock[i]->next->prev = thisRock[i]->prev;
-						free(thisRock[i]);
+							free(thisRock[i]);
 						currentStatus.score += dScore;
 						currentStatus.money += dMoney;
 						startTimer(SCORE, refreshRate);
