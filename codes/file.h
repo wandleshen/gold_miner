@@ -37,6 +37,7 @@ typedef struct Text{
 extern User currentStatus;
 //判定游戏是否结束
 extern int isGame;
+//定义文本指针
 textPointer ptr;
 
 void initFile();//初始化文件 

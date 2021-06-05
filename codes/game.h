@@ -17,21 +17,21 @@ enum{
 	SMALLSTONE,
 	MIDDLESTONE,
 	DDIAMOND
-};
+}; //矿物种类
 
 enum{
 	WAIT,
 	UP,
 	DOWN,
 	PAUSE
-};
+}; //钩子状态
 
 enum{
 	hookSpeed,
 	moreScore,
 	stoneValue,
 	hookSize
-};
+}; //金手指
 extern string username;
 extern User currentStatus;
 extern int isGame;
@@ -44,5 +44,6 @@ void initGame();  //初始化游戏界面
 void gameKeyboardEvent(int key, int event);  //游戏内相关键盘回调函数
 void gameTimer(int timerID);  //游戏内相关时钟回调函数
 void pauseGame();  //暂停游戏
+void anime();
 
 #endif
