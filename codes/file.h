@@ -23,6 +23,7 @@ typedef struct userRank{
     int level;
     int score;
     char userName[10]; //用户名最多9位
+    int isDoublePlayer;
     struct userRank* next;
 } *List;
 

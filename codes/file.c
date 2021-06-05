@@ -76,6 +76,7 @@ void insertUser(User curr){
     newUser->level = curr.level;
     newUser->score = curr.score;
     strcpy(newUser->userName,username); 
+    newUser->isDoublePlayer = curr.isDoublePlayer;
     newUser->next = move->next;
     move->next = newUser;
 }
@@ -97,6 +98,7 @@ void saveRank(){
         fwrite(&move->level,4,1,fp);
         fwrite(&move->score,4,1,fp);
         fwrite(move->userName,10,1,fp);
+        fwrite(&move->isDoublePlayer,4,1,fp);
         move = move->next;
     }
     //Ïú»ÙÁ´±í
@@ -121,6 +123,7 @@ void loadRank(){
         fread(&newUser->level,4,1,fp);
         fread(&newUser->score,4,1,fp);
         fread(newUser->userName,10,1,fp);
+    	fread(&newUser->isDoublePlayer,4,1,fp); 
         newUser->next = NULL;
         userTail->next = newUser;
         userTail = newUser;
