@@ -39,7 +39,7 @@ void initGame(){  //初始化新一局游戏
 	}
 	link = initBlocks();
 	target = 10 * (currentStatus.level + 1) * (currentStatus.level + 2) * (10 + currentStatus.isDoublePlayer * 5);
-	countdown = 6000;
+	countdown = 60000;
 	drawMainGame();
 	startTimer(TIMER, refreshRate);
 }
@@ -400,7 +400,7 @@ void anime(){
 					thisRock[i]->element.x += thisSpeed[i] * cos(PI - angle[i]);
 					thisRock[i]->element.y += thisSpeed[i] * sin(PI - angle[i]);
 				}
-				if (fabs(currentLength[i] - initLength) <= 0.03){
+				if (currentLength[i] - initLength <= 0.01){
 					condition[i] = WAIT;
 					if(thisRock[i]){  //得分
 						if(thisRock[i]->element.type == GOLD){
