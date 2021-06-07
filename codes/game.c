@@ -52,7 +52,7 @@ void drawTarget(){
 	if (currentStatus.isDoublePlayer)
 		MovePen(wWidth / 2 - 2.2, wHeight - 0.5);
 	else
-    	MovePen(0.1, wHeight * 5 / 6);
+    	MovePen(0.1, wHeight - 0.5);
     DrawTextString(s);
 }
 
@@ -272,7 +272,7 @@ void drawScore(){  //»æ³ö¼Ó·Ö
 	if (currentStatus.isDoublePlayer)
 		MovePen(wWidth / 2 - 1.5, wHeight - 0.6 - time);
 	else
-		MovePen(1.0, wHeight * 5 / 6 + 0.1 + time);
+		MovePen(1.0, wHeight - 0.6 - time);
 	sprintf(s, "+%d    +%d", dMoney, dScore);
 	DrawTextString(s);
 	time += dTime;
