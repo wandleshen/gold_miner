@@ -340,7 +340,7 @@ void anime(){
 		speed = 0.15;
 
 	for(int i = 0; i < 3; i++) thisSpeed[i] = speed;
-	countdown -= refreshRate;
+	countdown -= 2*refreshRate;
 
 	if(countdown <= 0 || link->next == NULL){
 		stopBGM(); 

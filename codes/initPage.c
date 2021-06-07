@@ -76,6 +76,7 @@ void initPageEvent(int x, int y, int button, int event){
 							loadGame();
 							drawMenu();
 							drawStore();
+							break;
 						case 4:
 							currentStatus.isDoublePlayer = 1;
 							startGameFunc();
@@ -84,6 +85,7 @@ void initPageEvent(int x, int y, int button, int event){
 							//¿ªÊ¼ÓÎÏ·
 							currentStatus.isDoublePlayer = 0;
 							startGameFunc();
+							break;
 						default:
 							break;
 				}

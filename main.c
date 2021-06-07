@@ -45,11 +45,10 @@ int isGameOver = 0;
 User currentStatus;
 
 void Main(){
-	initFile();
 	InitGraphics();
 	defineColor();
-  	drawIniPage();
-  	SetWindowTitle("黄金矿工");
+  drawIniPage();
+  SetWindowTitle("黄金矿工");
 	registerKeyboardEvent(KeyboardEventProcess);
 	registerMouseEvent(MouseEventProcess);
 	registerTimerEvent(TimerEventProcess);
