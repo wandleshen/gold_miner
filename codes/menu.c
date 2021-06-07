@@ -264,7 +264,7 @@ void menuKeyboardEvent(int key, int event){
 		case KEY_DOWN:
 			switch(key){
 				case 'H': case 'h':  //Help
-					system("notepad _help");
+					system("help.pdf");
 					break;
 				case 'L': case 'l':  //Load Game
 					showBox(1);
