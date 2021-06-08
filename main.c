@@ -28,7 +28,7 @@
 				 庄毅非
 请务必使用我们提供的libgraphics库进行编译
 创建于：2021/5/20
-最后修改：2021/5/30
+最后修改：2021/6/8
 ============================================================================================
 */
 
@@ -37,8 +37,8 @@
 
 
 
-#include "codes/drawing.h"
-#include "codes/event.h"
+#include "drawing.h"
+#include "event.h"
 #include <stdio.h>
 
 int isGameOver = 0;
