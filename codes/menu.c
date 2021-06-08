@@ -12,6 +12,7 @@ int i = -1;
 static int isPaused = 0;  //奇奇怪怪莫名其妙的flag，但是想不出更好的方法解决这件事儿
 int speedKey = 0;  //表示是否开启超级速度
 int isMusicPlaying = 1; //判断音乐是否在播放
+
 void drawMenu(){  //绘出顶部菜单栏 
 	SetPenColor("Blue");
 	MovePen(0, GetWindowHeight() - H);
@@ -326,7 +327,8 @@ void menuKeyboardEvent(int key, int event){
 }
 
 void drawGame(){  //绘出游戏菜单 
-	string text[4] = {
+	string text[5] = {
+		"游戏",
 		"载入游戏 (L)",
 		"暂停与继续 (P)",
 		"BGM (M)",
@@ -335,23 +337,34 @@ void drawGame(){  //绘出游戏菜单
 	
 	if (isShow[0] == 0)
 		SetEraseMode(1);
+	SetPenColor("Beige");
+	for (int i = 0; i < 5; i++){
+		StartFilledRegion(1);
+		MovePen(0, GetWindowHeight() - i * H);
+		DrawLine(0, -H);
+		DrawLine(W, 0);
+		DrawLine(0, H);
+		DrawLine(-W, 0);
+		EndFilledRegion();
+	}
 	SetPenColor("Blue");
-	for (int i = 2; i < 6; i++){
+	for (int i = 1; i < 6; i++){
 		MovePen(0, GetWindowHeight() - i * H);
 		DrawLine(W, 0);
 		DrawLine(0, H);
 	}
 	
-	for (int i = 1; i < 5; i++){
+	for (int i = 0; i < 5; i++){
 		MovePen(0.1, GetWindowHeight() - 0.2 - i * H);
-		DrawTextString(text[i - 1]);
+		DrawTextString(text[i]);
 	}
 	
 	SetEraseMode(0);
 }
 
 void drawTrainer(){  //绘出修改器菜单 
-	string text[3] = {
+	string text[4] = {
+		"修改器",
 		"Ultra Speed",
 		"More Time",
 		"Infinity Money"
@@ -359,38 +372,59 @@ void drawTrainer(){  //绘出修改器菜单
 	
 	if (isShow[1] == 0)
 		SetEraseMode(1);
+	SetPenColor("Beige");
+	for (int i = 0; i < 4; i++){
+		StartFilledRegion(1);
+		MovePen(W, GetWindowHeight() - i * H);
+		DrawLine(0, -H);
+		DrawLine(W, 0);
+		DrawLine(0, H);
+		DrawLine(-W, 0);
+		EndFilledRegion();
+	}
 	SetPenColor("Blue");
-	for (int i = 1; i < 4; i++){
+	for (int i = 0; i < 4; i++){
 		MovePen(W, GetWindowHeight() - i * H);
 		DrawLine(0, -H);
 		DrawLine(W, 0);
 		DrawLine(0, H);
 	}
-	for (int i = 1; i < 4; i++){
+	for (int i = 0; i < 4; i++){
 		MovePen(0.1 + W, GetWindowHeight() - 0.2 - i * H);
-		DrawTextString(text[i - 1]);
+		DrawTextString(text[i]);
 	}
 	
 	SetEraseMode(0);
 }
 
 void drawHelp(){  //绘出帮助菜单 
-	string text[2] = {
+	string text[3] = {
+		"帮助",
 		"如何游玩 (H)",
 		"关于我们"
 	};
 	
 	if (isShow[2] == 0)
 		SetEraseMode(1);
+	SetPenColor("Beige");
+	for (int i = 0; i < 3; i++){
+		StartFilledRegion(1);
+		MovePen(2 * W, GetWindowHeight() - i * H);
+		DrawLine(0, -H);
+		DrawLine(W, 0);
+		DrawLine(0, H);
+		DrawLine(-W, 0);
+		EndFilledRegion();
+	}
 	SetPenColor("Blue");
-	for (int i = 1; i < 3; i++){
+	for (int i = 0; i < 3; i++){
 		MovePen(2 * W, GetWindowHeight() - i * H);
 		DrawLine(0, -H);
 		DrawLine(W, 0);
 	}
-	for (int i = 1; i < 3; i++){
+	for (int i = 0; i < 3; i++){
 		MovePen(0.1 + 2 * W, GetWindowHeight() - 0.2 - i * H);
-		DrawTextString(text[i - 1]);
+		DrawTextString(text[i]);
 	}
 	
 	SetEraseMode(0);

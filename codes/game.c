@@ -261,6 +261,7 @@ void pauseGame() //暂停或者继续游戏游戏
         for(int i = 0; i < 3; i++) preCondition[i] = condition[i];
         for(int i = 0; i < 3; i++) condition[i] = PAUSE;
         cancelTimer(TIMER);
+
 		drawMainGame();
     }
 }
@@ -319,7 +320,7 @@ void gameTimer(int timerID){
 		case SCORE:
 			drawScore();
 			break;
-		case INPUT:{
+		case INPUT:
 			drawInputBox();
 			MovePen(ptr->x,ptr->y);
 			SetPenColor("white");
@@ -328,7 +329,6 @@ void gameTimer(int timerID){
 			DrawCurSor(ptr->data,ptr->curpos,ptr->x,ptr->y);
 			drawText();
 			break;
-		}
 	}
 }
 
