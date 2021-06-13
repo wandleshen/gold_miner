@@ -199,9 +199,9 @@ linkBlock* initBlocks(){  //生成矿物（双向链表，头链表(head)不储存数据）
 	block rock;
 	p->next = p->prev = NULL;
 	
-	numbers[SMALLGOLD] = RandomInteger(1, 5);
 	numbers[MIDDLEGOLD] = RandomInteger(1, 2);
 	numbers[LARGEGOLD] = RandomInteger(0, 1);
+	numbers[SMALLGOLD] = 8 - numbers[MIDDLEGOLD] - numbers[LARGEGOLD];
 	numbers[SMALLSTONE] = RandomInteger(min(1 + currentStatus.level, 3), min(2 + currentStatus.level, 4));
 	numbers[MIDDLESTONE] = RandomInteger(0, min(2 + currentStatus.level, 4));
 	numbers[DDIAMOND] = RandomInteger(min(1, 1 + currentStatus.level), min(2 + currentStatus.level, 5));
