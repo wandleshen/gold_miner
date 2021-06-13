@@ -336,7 +336,7 @@ void drawStore(){
 	SetFont("Œ¢»Ì—≈∫⁄");
 	MovePen(0, 0);
 	SetPenColor("Beige");
-    drawRec(wWidth, wHeight - 0.31);
+    drawRec(wWidth, wHeight);
     MovePen(wWidth / 2 - 0.6, wHeight - 1);
     
     //…ÃµÍ±ÍÃ‚ 
@@ -428,6 +428,7 @@ void drawStore(){
 	
 	SetFont("Œ¢»Ì—≈∫⁄");
 	SetPointSize(15);
+	drawMenu();
 }
 
 void showRank(){
